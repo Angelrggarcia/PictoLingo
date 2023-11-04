@@ -61,7 +61,6 @@ fun ScreenPictograms(navController: NavHostController) {
     }
 }
 
-
 @Composable
 fun PictogramGrid() {
     val count = remember { mutableStateOf(0) }
