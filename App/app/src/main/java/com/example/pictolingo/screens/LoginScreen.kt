@@ -10,13 +10,13 @@ import androidx.navigation.NavHostController
 
 
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .fillMaxSize()){
         Button(onClick = {
-            navController.navigate("Pictograms")
+            navController.navigate("UsersScreen")
         }) {
-            Text(text = "Prueba")
+            Text(text = "Login")
         }
     }
 }

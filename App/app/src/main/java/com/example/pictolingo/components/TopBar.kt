@@ -25,8 +25,8 @@ fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBeha
         ),
         title = {},
         navigationIcon = {
-            IconButton(onClick = { navController.navigate("Main"){
-                popUpTo("Main"){inclusive = true}
+            IconButton(onClick = { navController.navigate("Login"){
+                popUpTo("Login"){inclusive = true}
             } }) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
