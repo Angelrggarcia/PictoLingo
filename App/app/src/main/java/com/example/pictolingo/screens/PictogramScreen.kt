@@ -1,4 +1,4 @@
-package com.example.pictolingo
+package com.example.pictolingo.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.example.pictolingo.R
 import com.example.pictolingo.components.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)

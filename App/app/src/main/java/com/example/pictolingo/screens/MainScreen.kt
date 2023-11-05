@@ -1,4 +1,4 @@
-package com.example.pictolingo
+package com.example.pictolingo.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
