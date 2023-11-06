@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.pictolingo.screens.LevelsScreen
 import com.example.pictolingo.screens.LoginScreen
 import com.example.pictolingo.screens.ScreenPictograms
 import com.example.pictolingo.screens.TestScreen
@@ -24,6 +25,9 @@ fun Nav(){
         }
         composable(route = "Test"){
             TestScreen(navController)
+        }
+        composable(route = "Levels"){
+            LevelsScreen(navController)
         }
     }
 }

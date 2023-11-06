@@ -36,7 +36,7 @@ fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBeha
             }
         },
         actions = {
-            IconButton(onClick = { navController.navigate("Test") }) {
+            IconButton(onClick = { navController.navigate("Levels") }) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Localized description",
