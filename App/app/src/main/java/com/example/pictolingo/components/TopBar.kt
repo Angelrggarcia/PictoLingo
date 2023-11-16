@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBehavior) {
+fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBehavior, route: String, route1: String) {
     Log.d("COLOR", darkColorScheme().onSecondary.toString())
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -25,7 +25,7 @@ fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBeha
         ),
         title = {},
         navigationIcon = {
-            IconButton(onClick = { navController.navigate("Login"){
+            IconButton(onClick = { navController.navigate(route){
                 popUpTo("Login"){inclusive = true}
             } }) {
                 Icon(
@@ -36,7 +36,7 @@ fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBeha
             }
         },
         actions = {
-            IconButton(onClick = { navController.navigate("Levels") }) {
+            IconButton(onClick = { navController.navigate(route1) }) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Localized description",

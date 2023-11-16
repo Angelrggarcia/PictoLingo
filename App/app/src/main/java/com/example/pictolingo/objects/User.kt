@@ -1,14 +1,16 @@
 package com.example.pictolingo.objects
 
+import com.example.pictolingo.R
+
 data class User(
     val name: String,
-    val url: String,
+    val picture: Int,
 )
 
 fun getUsers(): List<User> {
     return listOf(
-        User("Juanito", "https://img.pokemondb.net/artwork/large/bulbasaur.jpg"),
-        User("Chani", "https://img.pokemondb.net/artwork/large/charmander.jpg"),
-        User("Carlos", "https://img.pokemondb.net/artwork/large/weedle.jpg"),
+        User("Juanito", R.drawable.user),
+        User("Chani", R.drawable.user),
+        User("Carlos", R.drawable.user),
     )
 }

@@ -33,7 +33,7 @@ fun LevelsScreen(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior)
+            TopBar(navController, scrollBehavior, "UsersScreen", "Levels")
         },
 
         ) { innerPadding ->

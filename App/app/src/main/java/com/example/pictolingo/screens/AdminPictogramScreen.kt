@@ -26,18 +26,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
-import com.example.pictolingo.objects.getUsers
+import com.example.pictolingo.objects.PictogramPack
+import com.example.pictolingo.objects.getPictogramPacks
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UsersScreen(navController: NavHostController) {
+fun AdminScreenPictograms(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Login", "Levels")
+            TopBar(navController, scrollBehavior, "Main", "Test")
         },
 
         ) { innerPadding ->
@@ -46,33 +47,34 @@ fun UsersScreen(navController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            UsersGrid(navController)
+            val onClick: () -> Unit = {navController.navigate("AdminPC")}
+            AdminPictogramGrid(getPictogramPacks()[0], onClick)
         }
+
     }
 }
 
 @Composable
-fun UsersGrid(navController: NavHostController) {
+fun AdminPictogramGrid(pictogramPack: PictogramPack, onClick: () -> Unit) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(3),
         content = {
             item(span = {
                 GridItemSpan(maxLineSpan)
             }){
                 Text(modifier = Modifier
                     .fillMaxWidth(),
-                    text ="Usuarios",
+                    text = pictogramPack.name,
                     textAlign = TextAlign.Center,
                     fontSize = 45.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif)
             }
-            items(items = getUsers()){ it ->
-                val enClick: () -> Unit = {navController.navigate("Pictograms")}
-                PictureCard(it.name, it.picture, enClick)
+            items(items = pictogramPack.anagrams){ it ->
+                PictureCard(it.name, it.picture,){}
             }
             item {
-                PictureCard(name = "Crea un nuevo usuario", imageURL = 0) {}
+                PictureCard(name = "Crea un nuevo Pictograma", imageURL = 0, onClick)
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),

@@ -22,7 +22,7 @@ fun TestScreen(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior)
+            TopBar(navController, scrollBehavior, "AdminPictograms", "Test")
         },
 
         ) { innerPadding ->
