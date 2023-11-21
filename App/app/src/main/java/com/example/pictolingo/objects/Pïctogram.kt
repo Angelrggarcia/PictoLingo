@@ -20,16 +20,16 @@ fun getPictogramPacks(): List<PictogramPack> {
         PictogramPack(
             "animales",
             listOf(
-                Pictogram("Bulbasaur", R.drawable.abeja),
-                Pictogram("Charmander", R.drawable.abeja),
-                Pictogram("Weedle", R.drawable.abeja),
-                Pictogram("Mew", R.drawable.abeja),
-                Pictogram("Pikachu", R.drawable.abeja),
-                Pictogram("Pichu", R.drawable.abeja),
-                Pictogram("Mewtwo", R.drawable.abeja),
-                Pictogram("Rufflet", R.drawable.abeja),
-                Pictogram("Braviary", R.drawable.abeja),
-                Pictogram("Eevee", R.drawable.abeja)
-            ), "Azul", R.drawable.abeja)
+                Pictogram("Abeja", R.drawable.abeja),
+                Pictogram("Burro", R.drawable.burro),
+                Pictogram("Conejo", R.drawable.conejo),
+                Pictogram("Pingüino", R.drawable.pinguino),
+                Pictogram("Vaca", R.drawable.vaca),
+                Pictogram("Gato", R.drawable.gato),
+                Pictogram("Raton", R.drawable.raton),
+                Pictogram("Pato", R.drawable.pato),
+                Pictogram("Zarigüeya", R.drawable.zarigueya),
+                Pictogram("Zorra", R.drawable.zorra)
+            ), "Azul", R.drawable.animales)
     )
 }

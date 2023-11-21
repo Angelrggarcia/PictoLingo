@@ -97,7 +97,7 @@ fun UsersGrid(navController: NavHostController) {
                 }
             }
             items(items = getUsers()){ it ->
-                val enClick: () -> Unit = {navController.navigate("Pictograms")}
+                val enClick: () -> Unit = {navController.navigate("Categories")}
                 PictureCard(it.name, it.picture, enClick)
             }
             item {
