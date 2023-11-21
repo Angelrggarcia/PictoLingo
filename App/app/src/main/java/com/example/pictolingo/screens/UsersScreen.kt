@@ -1,5 +1,6 @@
 package com.example.pictolingo.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +35,8 @@ import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getUsers
 import com.example.pictolingo.components.SegmentedButtonItem
 import com.example.pictolingo.components.SegmentedButtons
+import com.example.pictolingo.components.CargarPerfil
+import com.example.pictolingo.ui.theme.blaco
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,8 +44,9 @@ fun UsersScreen(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        containerColor = blaco,
         topBar = {
             TopBar(navController, scrollBehavior, "Login", "Levels")
         },
@@ -58,11 +63,22 @@ fun UsersScreen(navController: NavHostController) {
 }
 
 @Composable
+
 fun UsersGrid(navController: NavHostController) {
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    var gridCells = 0
+
+    if (isLandscape){
+        gridCells = 3}
+    else{
+        gridCells = 2}
+
+
     var selectedIndex by remember { mutableStateOf(0) }
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(gridCells),
         content = {
             item(span = {
                 GridItemSpan(maxLineSpan)
@@ -75,6 +91,7 @@ fun UsersGrid(navController: NavHostController) {
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif)
             }
+
             item(span = {
                 GridItemSpan(maxLineSpan)
             }){
@@ -82,27 +99,39 @@ fun UsersGrid(navController: NavHostController) {
                     SegmentedButtonItem(
                         selected = selectedIndex == 0,
                         onClick = { selectedIndex = 0 },
-                        label = { Text(text = "Alpha" )},
+                        label = { Text(text = "Elige un perfil" )},
                     )
                     SegmentedButtonItem(
                         selected = selectedIndex == 1,
                         onClick = { selectedIndex = 1 },
-                        label = { Text(text = "Bravo") },
+                        label = { Text(text = "Cargar perfil") },
                     )
                     SegmentedButtonItem(
                         selected = selectedIndex == 2,
                         onClick = { selectedIndex = 2 },
-                        label = { Text(text = "Bravo") },
+                        label = { Text(text = "Crear perfil") },
                     )
                 }
             }
-            items(items = getUsers()){ it ->
-                val enClick: () -> Unit = {navController.navigate("Pictograms")}
-                PictureCard(it.name, it.picture, enClick)
+            when(selectedIndex){
+                0 -> {
+                    items(items = getUsers()){ it ->
+                        val enClick: () -> Unit = {navController.navigate("Pictograms")}
+                        PictureCard(it.name, it.picture, enClick)
+                    }
+                    item {
+                        PictureCard(name = "Crea un nuevo usuario", imageURL = 0) {}
+                    }
+
+                }
+                1 -> {
+                    item(span = {
+                        GridItemSpan(maxLineSpan)
+                    }){CargarPerfil()}
+                }
+                2 -> {}
             }
-            item {
-                PictureCard(name = "Crea un nuevo usuario", imageURL = 0) {}
-            }
+
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),

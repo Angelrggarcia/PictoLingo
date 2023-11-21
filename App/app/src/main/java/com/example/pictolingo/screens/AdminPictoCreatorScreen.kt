@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -93,7 +94,7 @@ fun Creator() {
                         LazyHorizontalGrid(rows = GridCells.Fixed(1),
                             content ={
                                 items(items = getColorList()){
-                                    ColorCard(color = it){}}
+                                    ColorCard(color = 0xFFFFFFFF){}}
 
                             })
                         OutlinedTextField(
