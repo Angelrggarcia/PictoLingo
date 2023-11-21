@@ -29,8 +29,9 @@ import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
 import com.example.pictolingo.ui.theme.blaco
 import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
 import com.example.pictolingo.ui.theme.otro_blaco
-@Composable
+
 // se encarga de generar la funcion para mandar codigos y traer el perfil
+@Composable
 fun CargarPerfil(){
 
     val configuration = LocalConfiguration.current
@@ -38,14 +39,11 @@ fun CargarPerfil(){
 
     Column {
         Box(
-            // estructura de la box
             modifier = Modifier
                 .padding(8.dp)
                 .background(color = otro_blaco)
                 .border(width = 4.dp, color = hueso, shape = RoundedCornerShape(40.dp) )
                 .fillMaxWidth(),
-                //.aspectRatio(1f)
-                //.clip(RoundedCornerShape(40.dp))
             contentAlignment = Alignment.TopCenter
         ){
             Text(
