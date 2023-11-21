@@ -19,7 +19,7 @@ fun LoginScreen(navController: NavHostController) {
             Text(text = "Login")
         }
         Button(onClick = {
-            navController.navigate("AdminPictograms")
+            navController.navigate("AdminPictogramCat")
         }) {
             Text(text = "Admin")
         }
