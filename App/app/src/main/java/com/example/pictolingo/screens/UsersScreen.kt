@@ -67,13 +67,11 @@ fun UsersScreen(navController: NavHostController) {
 fun UsersGrid(navController: NavHostController) {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    var gridCells = 0
+    var gridCells = 2
 
     if (isLandscape){
-        gridCells = 3}
-    else{
-        gridCells = 2}
-
+        gridCells = 3
+    }
 
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -127,7 +125,7 @@ fun UsersGrid(navController: NavHostController) {
                 1 -> {
                     item(span = {
                         GridItemSpan(maxLineSpan)
-                    }){CargarPerfil()}
+                    }){CargarPerfil(navController)}
                 }
                 2 -> {}
             }

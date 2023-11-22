@@ -34,6 +34,7 @@ import com.example.pictolingo.components.ColorCard
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getColorList
+import com.example.pictolingo.ui.theme.blaco
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,7 +94,7 @@ fun CatCreator() {
                         LazyHorizontalGrid(rows = GridCells.Fixed(1),
                             content ={
                                 items(items = getColorList()){
-                                    ColorCard(color = it){}
+                                    ColorCard(color = blaco){}
                                 }
 
                             })

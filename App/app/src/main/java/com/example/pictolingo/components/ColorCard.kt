@@ -5,9 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ColorCard(color: Long, enClick: () -> Unit) {
+fun ColorCard(color: Color, enClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .padding(8.dp)
@@ -32,7 +30,7 @@ fun ColorCard(color: Long, enClick: () -> Unit) {
                     .padding(8.dp)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(40.dp))
-                    .background(Color(color))
+                    .background(color)
             )
         }
     }
