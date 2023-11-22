@@ -127,7 +127,7 @@ fun UsersGrid(navController: NavHostController) {
                 1 -> {
                     item(span = {
                         GridItemSpan(maxLineSpan)
-                    }){CargarPerfil()}
+                    }){CargarPerfil(navController)}
                 }
                 2 -> {}
             }
