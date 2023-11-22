@@ -94,10 +94,7 @@ fun CargarPerfil(navController : NavHostController){
                             modifier = Modifier.clickable {
                                 text = "" }) },
                     label = { Text("Poner el codigo") },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-
-                    )
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
                 Button(onClick = {
                     navController.navigate("AdminPictogramCat")
