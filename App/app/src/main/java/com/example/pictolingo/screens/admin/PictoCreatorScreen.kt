@@ -1,4 +1,4 @@
-package com.example.pictolingo.screens
+package com.example.pictolingo.screens.admin
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.example.pictolingo.screens
+package com.example.pictolingo.screens.users
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,21 +10,20 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.PictogramPack
@@ -32,7 +31,7 @@ import com.example.pictolingo.objects.getPictogramPacks
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenPictograms(navController: NavHostController) {
+fun ScreenPictogramCategory(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -42,35 +41,35 @@ fun ScreenPictograms(navController: NavHostController) {
             TopBar(navController, scrollBehavior, "UsersScreen", "Levels")
         },
 
-    ) { innerPadding ->
+        ) { innerPadding ->
         Box(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            PictogramGrid(getPictogramPacks()[0])
+            PictogramCategoryGrid(getPictogramPacks(), navController)
         }
     }
 }
 
 @Composable
-fun PictogramGrid(pictogramPack: PictogramPack) {
+fun PictogramCategoryGrid(pictogramPacks: List<PictogramPack>,navController: NavHostController) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(2),
         content = {
             item(span = {
                 GridItemSpan(maxLineSpan)
             }){
                 Text(modifier = Modifier
                     .fillMaxWidth(),
-                    text = pictogramPack.name,
+                    text = "Categorias",
                     textAlign = TextAlign.Center,
                     fontSize = 45.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif)
             }
-            items(items = pictogramPack.anagrams){ it ->
-                val enClick: () -> Unit = {}
+            items(items = pictogramPacks){ it ->
+                val enClick: () -> Unit = {navController.navigate("Pictograms")}
                 PictureCard(it.name, it.picture, enClick)
             }
         },
