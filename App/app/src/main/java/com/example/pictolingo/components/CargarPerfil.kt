@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.pictolingo.ui.theme.hueso
 import java.nio.file.WatchEvent
@@ -38,16 +39,16 @@ import com.example.pictolingo.ui.theme.otro_blaco
 
 @Composable
 // se encarga de generar la funcion para mandar codigos y traer el perfil
-fun CargarPerfil(){
+fun CargarPerfil(navController: NavHostController){
 
     Column {
         Box(
             // estructura de la box
             modifier = Modifier
-                .padding(8.dp)
-                .background(color = otro_blaco)
-                .border(width = 4.dp, color = hueso, shape = RoundedCornerShape(40.dp))
-                .fillMaxWidth(),
+                    .padding(8.dp)
+                    .background(color = otro_blaco)
+                    .border(width = 4.dp, color = hueso, shape = RoundedCornerShape(40.dp))
+                    .fillMaxWidth(),
                 //.aspectRatio(1f)
                 //.clip(RoundedCornerShape(40.dp))
             contentAlignment = Alignment.TopCenter
@@ -59,7 +60,7 @@ fun CargarPerfil(){
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(16.dp)
             )
-
+            buttonsNav(navController)
 
 
         }
