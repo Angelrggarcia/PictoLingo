@@ -36,6 +36,7 @@ import com.example.pictolingo.objects.getUsers
 import com.example.pictolingo.components.SegmentedButtonItem
 import com.example.pictolingo.components.SegmentedButtons
 import com.example.pictolingo.components.CargarPerfil
+import com.example.pictolingo.components.CrearPerfil
 import com.example.pictolingo.ui.theme.blaco
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,11 +68,7 @@ fun LoginScreen(navController: NavHostController) {
 fun UsersGrid(navController: NavHostController) {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    var gridCells = 2
-
-    if (isLandscape){
-        gridCells = 3
-    }
+    val gridCells = if (isLandscape){ 3 } else { 2 }
 
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -127,7 +124,11 @@ fun UsersGrid(navController: NavHostController) {
                         GridItemSpan(maxLineSpan)
                     }){CargarPerfil(navController)}
                 }
-                2 -> {}
+                2 -> {
+                    item(span = {
+                        GridItemSpan(maxLineSpan)
+                    }){ CrearPerfil(navController) }
+                }
             }
 
         },
