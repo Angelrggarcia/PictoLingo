@@ -38,7 +38,7 @@ fun ScreenPictogramCategoryAdmin(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Login", "Levels")
+            TopBar(navController, scrollBehavior, "Main", "Levels")
         },
 
         ) { innerPadding ->
