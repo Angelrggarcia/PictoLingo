@@ -48,7 +48,7 @@ fun LoginScreen(navController: NavHostController) {
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = blaco,
         topBar = {
-            TopBar(navController, scrollBehavior, "Login", "Levels")
+            TopBar(navController, scrollBehavior,"Login", "Levels", false)
         },
 
         ) { innerPadding ->

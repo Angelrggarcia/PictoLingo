@@ -1,6 +1,5 @@
 package com.example.pictolingo.components
 
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
@@ -11,36 +10,51 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navController: NavHostController, scrollBehavior: TopAppBarScrollBehavior, route: String, route1: String) {
-    Log.d("COLOR", darkColorScheme().onSecondary.toString())
+fun TopBar(
+    navController: NavHostController,
+    scrollBehavior: TopAppBarScrollBehavior,
+    backRoute: String,
+    menuRoute: String,
+    back: Boolean = true,
+    menu: Boolean = true,
+) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = darkColorScheme().onSecondary,
         ),
         title = {},
         navigationIcon = {
-            IconButton(onClick = { navController.navigate(route){
-                popUpTo("Login"){inclusive = true}
-            } }) {
+            IconButton(
+                onClick = { navController.navigate(backRoute) {
+                    popUpTo("Login"){inclusive = true} }},
+                ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = "Localized description",
-                    tint = lightColorScheme().background,
+                    tint = if (back) {
+                        Color.White
+                    } else {
+                        Color.Transparent
+                    },
                 )
             }
         },
         actions = {
-            IconButton(onClick = { navController.navigate(route1) }) {
+            IconButton(onClick = { navController.navigate(menuRoute) }) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Localized description",
-                    tint = lightColorScheme().background,
+                    tint = if (menu) {
+                        Color.White
+                    } else {
+                        Color.Transparent
+                    },
                 )
             }
         },
