@@ -61,7 +61,7 @@ fun Levels() {
                 fontFamily = FontFamily.SansSerif)
         }
         items(items = getLevels()){ it ->
-            LevelSmall(it)
+            LevelSmall(it){}
         }
         item {
 

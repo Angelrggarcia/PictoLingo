@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun PictureCard(name: String?, imageURL: Int, enClick: () -> Unit) {
+fun PictureCard(name: String? = "", imageURL: Int, enClick: () -> Unit) {
     Column {
         Box(
             modifier = Modifier

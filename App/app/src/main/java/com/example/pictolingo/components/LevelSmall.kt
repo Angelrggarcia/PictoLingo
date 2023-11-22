@@ -3,6 +3,7 @@ package com.example.pictolingo.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,14 +31,15 @@ import com.example.pictolingo.R
 import com.example.pictolingo.objects.Level
 
 @Composable
-fun LevelSmall(level: Level) {
+fun LevelSmall(level: Level, enClick: () -> Unit) {
     Box(modifier = Modifier
         .padding(horizontal = 30.dp, vertical = 15.dp)
         .border(width = 2.dp, color = Color(0xFF000000), shape = RoundedCornerShape(15.dp))
         .clip(RoundedCornerShape(15.dp))
         .background(level.color)
         .height(80.dp)
-        .fillMaxWidth(),
+        .fillMaxWidth()
+        .clickable { enClick() },
         contentAlignment = Alignment.Center
     ){
         Row(
