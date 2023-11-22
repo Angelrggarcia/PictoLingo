@@ -82,6 +82,7 @@ fun Creator() {
 
             Column{
                 var name by remember { mutableStateOf("")}
+                var description by remember { mutableStateOf("")}
                 Box(modifier = Modifier
                     .fillMaxHeight(1/3f),
                     contentAlignment = Alignment.TopCenter
@@ -97,12 +98,12 @@ fun Creator() {
                                     ColorCard(color = 0xFFFFFFFF){}}
 
                             })
-                        OutlinedTextField(
-                            value = name,
-                            onValueChange = { name = it },
-                            label = { Text("Nombre") })
                     }
                 }
+                OutlinedTextField(
+                    value = description,
+                    onValueChange = { description = it },
+                    label = { Text("Descripcion") })
             }
         }
     }

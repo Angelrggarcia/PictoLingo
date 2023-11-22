@@ -38,7 +38,7 @@ fun AdminScreenPictograms(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Main", "Test")
+            TopBar(navController, scrollBehavior, "AdminPictogramCat", "Test")
         },
 
         ) { innerPadding ->

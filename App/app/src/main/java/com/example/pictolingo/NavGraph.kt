@@ -7,6 +7,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pictolingo.screens.AdminScreenPictograms
 import com.example.pictolingo.screens.LevelsScreen
 import com.example.pictolingo.screens.LoginScreen
+import com.example.pictolingo.screens.ScreenCategoryCreator
+import com.example.pictolingo.screens.ScreenPictogramCategory
+import com.example.pictolingo.screens.ScreenPictogramCategoryAdmin
 import com.example.pictolingo.screens.ScreenPictogramCreator
 import com.example.pictolingo.screens.ScreenPictograms
 import com.example.pictolingo.screens.TestScreen
@@ -36,6 +39,15 @@ fun Nav(){
         }
         composable(route = "AdminPC"){
             ScreenPictogramCreator(navController)
+        }
+        composable(route = "Categories"){
+            ScreenPictogramCategory(navController)
+        }
+        composable(route = "AdminPictogramCat"){
+            ScreenPictogramCategoryAdmin(navController)
+        }
+        composable(route = "CatCreator"){
+            ScreenCategoryCreator(navController)
         }
     }
 }
