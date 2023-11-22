@@ -40,7 +40,7 @@ import com.example.pictolingo.ui.theme.blaco
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UsersScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(

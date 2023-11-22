@@ -1,4 +1,4 @@
-package com.example.pictolingo.screens
+package com.example.pictolingo.screens.admin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,14 +31,14 @@ import com.example.pictolingo.objects.getPictogramPacks
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AdminScreenPictograms(navController: NavHostController) {
+fun ScreenPictogramCategoryAdmin(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "AdminPictogramCat", "Test")
+            TopBar(navController, scrollBehavior, "Login", "Levels")
         },
 
         ) { innerPadding ->
@@ -47,31 +47,31 @@ fun AdminScreenPictograms(navController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            val onClick: () -> Unit = {navController.navigate("AdminPC")}
-            AdminPictogramGrid(getPictogramPacks()[0], onClick)
+            val onClick: () -> Unit = {navController.navigate("CatCreator")}
+            AdminPictogramCategoryGrid(getPictogramPacks(), navController, onClick)
         }
-
     }
 }
 
 @Composable
-fun AdminPictogramGrid(pictogramPack: PictogramPack, onClick: () -> Unit) {
+fun AdminPictogramCategoryGrid(pictogramPacks: List<PictogramPack>, navController: NavHostController, onClick: () -> Unit) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(2),
         content = {
             item(span = {
                 GridItemSpan(maxLineSpan)
             }){
                 Text(modifier = Modifier
                     .fillMaxWidth(),
-                    text = pictogramPack.name,
+                    text = "Categorias",
                     textAlign = TextAlign.Center,
                     fontSize = 45.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif)
             }
-            items(items = pictogramPack.anagrams){ it ->
-                PictureCard(it.name, it.picture,){}
+            items(items = pictogramPacks){ it ->
+                val enClick: () -> Unit = {navController.navigate("AdminPictograms")}
+                PictureCard(it.name, it.picture, enClick)
             }
             item {
                 PictureCard(name = "Crea un nuevo Pictograma", imageURL = 0, onClick)
