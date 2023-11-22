@@ -33,6 +33,7 @@ fun TopBar(
             IconButton(
                 onClick = { navController.navigate(backRoute) {
                     popUpTo("Login"){inclusive = true} }},
+                enabled = back,
                 ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
@@ -46,7 +47,10 @@ fun TopBar(
             }
         },
         actions = {
-            IconButton(onClick = { navController.navigate(menuRoute) }) {
+            IconButton(
+                onClick = { navController.navigate(menuRoute) },
+                enabled = menu,
+            ) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Localized description",
