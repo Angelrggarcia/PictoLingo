@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +21,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +30,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.pictolingo.ui.theme.azul_verdoso
 import com.example.pictolingo.ui.theme.blaco
 import com.example.pictolingo.ui.theme.gris
@@ -37,12 +37,23 @@ import com.example.pictolingo.ui.theme.hueso
 import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
 import com.example.pictolingo.ui.theme.otro_blaco
 
+@Composable
+fun CrearPerfil( onCreatePerfil : () -> Unit ){
+
+    var screen by remember { mutableStateOf(1) }
+
+    when(screen) {
+        1 -> {Login { screen = 2 } }
+        2 -> {Perfil{ onCreatePerfil() }}
+    }
+
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CrearPerfil(navController : NavHostController){
-
-    var usuario by rememberSaveable { mutableStateOf("") }
-    var contrasena by rememberSaveable { mutableStateOf("") }
+fun Login(onScreenChange : () -> Unit) {
+    var usuario by remember { mutableStateOf("") }
+    var contrasena by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -96,7 +107,7 @@ fun CrearPerfil(navController : NavHostController){
             Text(
                 text = "Contraseña: ",
                 modifier = Modifier
-                        .padding(10.dp)
+                    .padding(10.dp)
             )
             OutlinedTextField(
                 value = contrasena,
@@ -115,7 +126,119 @@ fun CrearPerfil(navController : NavHostController){
                     .fillMaxWidth(),
             )
             Button(
-                onClick = {},
+                onClick = { onScreenChange() },
+                colors = buttonColors(
+                    containerColor = azul_verdoso,
+                    contentColor = blaco,
+                    disabledContainerColor = gris,
+                    disabledContentColor = blaco,
+                ),
+                modifier = Modifier
+                    .padding(10.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text (
+                    "Confirmar"
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Perfil(onCreatePerfil : () -> Unit) {
+
+    var nombre by remember { mutableStateOf("") }
+    var codigo by remember { mutableStateOf("") }
+    var edad by remember { mutableStateOf("") }
+
+    Box(
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+            .background(color = otro_blaco, shape = RoundedCornerShape(40.dp))
+            .border(width = 4.dp, color = hueso, shape = RoundedCornerShape(40.dp))
+            .fillMaxWidth(0.75f),
+        contentAlignment = Alignment.TopCenter,
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(10.dp),
+        ) {
+            Text(
+                text = "Crear un perfil",
+                color = md_theme_light_onPrimaryContainer,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth()
+            )
+            Text(
+                text = "Nombre: ",
+                modifier = Modifier
+                    .padding(10.dp)
+            )
+            OutlinedTextField(
+                value = nombre,
+                onValueChange = { nombre = it },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Localized description",
+                    )
+                },
+                modifier = Modifier
+                    .padding(10.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            )
+            Row (Modifier.fillMaxWidth()) {
+                Column (Modifier.weight(2f)) {
+                    Text(
+                        text = "Código de alumno: ",
+                        modifier = Modifier
+                            .padding(10.dp)
+                    )
+                    OutlinedTextField(
+                        value = codigo,
+                        onValueChange = { codigo = it },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "Localized description",
+                            )
+                        },
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .align(Alignment.CenterHorizontally),
+                    )
+                }
+                Column (Modifier.weight(1f)) {
+                    Text(
+                        text = "Edad: ",
+                        modifier = Modifier
+                            .padding(10.dp)
+                    )
+                    OutlinedTextField(
+                        value = edad,
+                        onValueChange = { edad = it },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "Localized description",
+                            )
+                        },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .align(Alignment.CenterHorizontally)
+                            .fillMaxWidth(),
+                    )
+                }
+            }
+            Button(
+                onClick = { onCreatePerfil() },
                 colors = buttonColors(
                     containerColor = azul_verdoso,
                     contentColor = blaco,
