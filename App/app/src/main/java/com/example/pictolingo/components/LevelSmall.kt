@@ -50,17 +50,17 @@ fun LevelSmall(level: Level) {
                 painterResource(id = level.emoji),
                 contentDescription = "Level face",
                 Modifier
+                    .padding(15.dp)
                     .fillMaxHeight()
-                    .padding(10.dp)
                     .background(Color(0xFFFFFFFF), shape = CircleShape)
-                    .weight(1.5f)
-                    .clip(CircleShape)
+                    .weight(.4f)
             )
             Text(
                 text = level.name,
                 style = MaterialTheme.typography.displayMedium.copy(fontSize = 30.sp),
                 textAlign = TextAlign.Left,
                 fontFamily = FontFamily.SansSerif,
+                color = Color(0xFF000000),
                 modifier = Modifier
                     .weight(4f)
                     .align(Alignment.CenterVertically)
