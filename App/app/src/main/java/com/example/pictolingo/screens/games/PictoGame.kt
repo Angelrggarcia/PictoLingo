@@ -15,7 +15,7 @@ import com.example.pictolingo.R
 import com.example.pictolingo.components.PictureCard
 
 @Composable
-fun JuegoDePictogramas(n:Int) {
+fun JuegoDePictogramas(dificulty:Int) {
     Column(
         modifier = Modifier
             .fillMaxSize()
