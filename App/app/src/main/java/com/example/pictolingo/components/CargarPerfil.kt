@@ -5,8 +5,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -44,7 +47,7 @@ fun CargarPerfil(navController : NavHostController){
 
         Box(
             modifier = Modifier
-                .fillMaxWidth(.75f)
+                .fillMaxWidth(.70f)
                 .align(Alignment.CenterHorizontally)
                 .padding(8.dp)
                 .background(
@@ -60,7 +63,7 @@ fun CargarPerfil(navController : NavHostController){
                         .padding(16.dp),
                     text = "Introduce el codigo del perfil que desea cargar.",
                     color = md_theme_light_onPrimaryContainer,
-                    fontSize = 50.sp,
+                    fontSize = 40.sp,
                     lineHeight = 1.2.em,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
@@ -68,9 +71,12 @@ fun CargarPerfil(navController : NavHostController){
 
                 )
                 Text(
-                    text = "Favor de introducir el texto de 10 dígitos dados por el administrador",
+                    text = "Favor de introducir el codigo de 10 dígitos dados por el administrador",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
                     color = md_theme_light_onPrimaryContainer,
-                    fontSize = 20.sp,
+                    fontSize = 25.sp,
                     lineHeight = 1.2.em,
                     fontWeight = FontWeight.Light,
                     textAlign = TextAlign.Center
@@ -79,8 +85,10 @@ fun CargarPerfil(navController : NavHostController){
                 )
                 OutlinedTextField(
                     modifier = Modifier
+                        .padding(8.dp)
                         .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth(.50f),
+
+                        .fillMaxWidth(.60f),
                     value =  text,
                     onValueChange = {
                         // Filtrar para permitir solo números
@@ -91,18 +99,24 @@ fun CargarPerfil(navController : NavHostController){
                         Icon(
                             Icons.Filled.Clear,
                             contentDescription = null,
-                            modifier = Modifier.clickable {
-                                text = "" }) },
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .clickable { text = "" }) },
                     label = { Text("Poner el codigo") },
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Number
 
                     )
                 )
-                Button(onClick = {
-                    navController.navigate("AdminPictogramCat")
-                },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                Button(
+                    onClick = {
+                        navController.navigate("AdminPictogramCat")
+                    },
+                    modifier = Modifier
+                        //.height(45.dp)
+                        //.width(45.dp)
+                        .fillMaxWidth(2/6f)
+                        .align(Alignment.CenterHorizontally)
                         .padding(16.dp)
 
                     ) {
