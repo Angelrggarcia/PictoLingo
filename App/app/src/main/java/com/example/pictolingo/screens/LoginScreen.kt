@@ -127,7 +127,7 @@ fun UsersGrid(navController: NavHostController) {
                 2 -> {
                     item(span = {
                         GridItemSpan(maxLineSpan)
-                    }){ CrearPerfil(navController) }
+                    }){ CrearPerfil{ selectedIndex = 0 } }
                 }
             }
 

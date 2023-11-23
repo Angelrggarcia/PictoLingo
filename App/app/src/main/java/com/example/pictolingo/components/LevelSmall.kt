@@ -31,7 +31,7 @@ import com.example.pictolingo.R
 import com.example.pictolingo.objects.Level
 
 @Composable
-fun LevelSmall(level: Level, enClick: () -> Unit) {
+fun LevelSmall(level: Level) {
     Box(modifier = Modifier
         .padding(horizontal = 30.dp, vertical = 15.dp)
         .border(width = 2.dp, color = Color(0xFF000000), shape = RoundedCornerShape(15.dp))
@@ -39,7 +39,7 @@ fun LevelSmall(level: Level, enClick: () -> Unit) {
         .background(level.color)
         .height(80.dp)
         .fillMaxWidth()
-        .clickable { enClick() },
+        .clickable { level.enClick },
         contentAlignment = Alignment.Center
     ){
         Row(
@@ -50,17 +50,17 @@ fun LevelSmall(level: Level, enClick: () -> Unit) {
                 painterResource(id = level.emoji),
                 contentDescription = "Level face",
                 Modifier
+                    .padding(15.dp)
                     .fillMaxHeight()
-                    .padding(10.dp)
                     .background(Color(0xFFFFFFFF), shape = CircleShape)
-                    .weight(1.5f)
-                    .clip(CircleShape)
+                    .weight(.4f)
             )
             Text(
                 text = level.name,
                 style = MaterialTheme.typography.displayMedium.copy(fontSize = 30.sp),
                 textAlign = TextAlign.Left,
                 fontFamily = FontFamily.SansSerif,
+                color = Color(0xFF000000),
                 modifier = Modifier
                     .weight(4f)
                     .align(Alignment.CenterVertically)

@@ -103,10 +103,7 @@ fun CargarPerfil(navController : NavHostController){
                                 .padding(8.dp)
                                 .clickable { text = "" }) },
                     label = { Text("Poner el codigo") },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-
-                    )
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
                 Button(
                     onClick = {

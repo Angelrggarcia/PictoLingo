@@ -16,13 +16,14 @@ data class Level(
     val count: Number,
     val emoji: Int,
     val color: Color,
+    val enClick: () -> Unit,
 )
 
 fun getLevels(): List<Level> {
     return listOf(
-        Level("Fácil", 51, very_happy_face, azul_verdoso),
-        Level("Medio", 42, happy_face, verde),
-        Level("Difícil", 35, neutral_face, rosa),
-        Level("Muy difícil", 18, sad_face, morado),
+        Level("Fácil", 51, very_happy_face, azul_verdoso){/*TODO*/},
+        Level("Medio", 42, happy_face, verde){/*TODO*/},
+        Level("Difícil", 35, neutral_face, rosa){/*TODO*/},
+        Level("Muy difícil", 18, sad_face, morado){/*TODO*/},
     )
 }
