@@ -20,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +38,13 @@ fun LevelSmall(level: Level) {
         .padding(horizontal = 30.dp, vertical = 15.dp)
         .border(width = 2.dp, color = Color(0xFF000000), shape = RoundedCornerShape(15.dp))
         .clip(RoundedCornerShape(15.dp))
-        .background(level.color)
+        .background(brush = Brush.horizontalGradient(
+            listOf(
+                level.color,
+                Color(0xFFD9D9D9),
+                level.color
+            )
+        ))
         .height(80.dp)
         .fillMaxWidth()
         .clickable { level.enClick },
@@ -50,16 +58,17 @@ fun LevelSmall(level: Level) {
                 painterResource(id = level.emoji),
                 contentDescription = "Level face",
                 Modifier
-                    .padding(15.dp)
+                    .padding(horizontal = 15.dp, vertical = 5.dp)
                     .fillMaxHeight()
-                    .background(Color(0xFFFFFFFF), shape = CircleShape)
-                    .weight(.4f)
+                    .weight(1.5f)
+                    .align(Alignment.CenterVertically)
             )
             Text(
                 text = level.name,
                 style = MaterialTheme.typography.displayMedium.copy(fontSize = 30.sp),
                 textAlign = TextAlign.Left,
                 fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
                 color = Color(0xFF000000),
                 modifier = Modifier
                     .weight(4f)
@@ -69,7 +78,6 @@ fun LevelSmall(level: Level) {
             Column(
                 modifier = Modifier
                     .weight(2f)
-
                     .align(Alignment.CenterVertically)
                     .padding(horizontal = 10.dp)
                     .offset(y = 7.dp)
