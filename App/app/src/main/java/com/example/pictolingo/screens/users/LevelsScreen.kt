@@ -74,23 +74,24 @@ fun Levels(navController: NavHostController) {
             OutlinedButton(
                 modifier = Modifier
                     .padding(top = 35.dp),
-                onClick = { navController.navigate("Categories")},
+
+                onClick = {navController.navigate("Categories")},
                 colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color(0xFF42A5F5)
+                    contentColor = Color(0xFF18D2B6)
                 ),
                 border = BorderStroke(
                     width = 2.dp,
 
                     brush = Brush.horizontalGradient(
                         listOf(
-                            Color(0xFF42A5F5),
-                            Color(0xFFFFA726)
+                            Color(0xFF18D2B6),
+                            Color(0xFFFF595E)
                         )
                     )
                 )
             ) {
                 Text(text ="Pictogramas",
-                    color = Color(0xFF42A5F5),
+                    color = Color(0xFF18D2B6),
                     textAlign = TextAlign.Center,
                     fontSize = 45.sp,
                     fontWeight = FontWeight.Bold,
