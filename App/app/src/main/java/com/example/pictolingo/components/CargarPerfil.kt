@@ -61,7 +61,7 @@ fun CargarPerfil(navController : NavHostController){
             Column {
                 Text(
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(10.dp),
                     text = "Introduce el codigo del perfil que desea cargar.",
                     color = md_theme_light_onPrimaryContainer,
                     fontSize = 40.sp,
@@ -86,7 +86,7 @@ fun CargarPerfil(navController : NavHostController){
                 )
                 OutlinedTextField(
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(18.dp)
                         .align(Alignment.CenterHorizontally)
 
                         .fillMaxWidth(.60f),
@@ -116,7 +116,7 @@ fun CargarPerfil(navController : NavHostController){
                         .defaultMinSize(minWidth = 150.dp)
                         .fillMaxWidth(2/6f)
                         .align(Alignment.CenterHorizontally)
-                        .padding(16.dp)
+                        .padding(6.dp)
 
                     ) {
                     Text(text = "Enviar")
