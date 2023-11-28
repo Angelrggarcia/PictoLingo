@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.pictolingo.components.LevelSmall
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getLevels
@@ -48,13 +49,13 @@ fun LevelsScreen(navController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            Levels()
+            Levels(navController)
         }
     }
 }
 
 @Composable
-fun Levels() {
+fun Levels(navController: NavHostController) {
     LazyColumn(content = {
         item{
             Text(modifier = Modifier
@@ -73,7 +74,7 @@ fun Levels() {
             OutlinedButton(
                 modifier = Modifier
                     .padding(top = 35.dp),
-                onClick = {/*TODO*/ },
+                onClick = { navController.navigate("Categories")},
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color(0xFF42A5F5)
                 ),
