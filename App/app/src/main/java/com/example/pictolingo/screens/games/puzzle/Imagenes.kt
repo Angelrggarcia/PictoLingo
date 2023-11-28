@@ -1,4 +1,4 @@
-package com.example.pictolingo.screens.games.Puzzle
+package com.example.pictolingo.screens.games.puzzle
 
 import android.content.Context
 import android.graphics.Bitmap

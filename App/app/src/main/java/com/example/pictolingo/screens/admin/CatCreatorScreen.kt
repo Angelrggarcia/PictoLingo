@@ -94,7 +94,7 @@ fun CatCreator() {
                         LazyHorizontalGrid(rows = GridCells.Fixed(1),
                             content ={
                                 items(items = getColorList()){
-                                    ColorCard(color = blaco){}
+                                    ColorCard(color = it){}
                                 }
 
                             })

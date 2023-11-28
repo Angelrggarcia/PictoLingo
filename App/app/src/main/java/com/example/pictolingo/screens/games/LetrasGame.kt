@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LetrasGame() {
-    val palabras = listOf("GATO", "PERRO", "CASA", "ÁRBOL", "FLOR", "POPOCATEPETL", "XOLOITZCUINTLE")
+    val palabras = listOf("GATO", "PERRO", "CASA",
+        "ÁRBOL", "FLOR", "POPOCATEPETL", "XOLOITZCUINTLE")
 
     var palabraActual by remember { mutableStateOf(palabras.random()) }
     var letrasSeleccionadas by remember { mutableStateOf("") }
