@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,7 +48,7 @@ fun CargarPerfil(navController : NavHostController){
 
         Box(
             modifier = Modifier
-                .fillMaxWidth(.70f)
+                .fillMaxWidth(.80f)
                 .align(Alignment.CenterHorizontally)
                 .padding(8.dp)
                 .background(
@@ -112,6 +113,7 @@ fun CargarPerfil(navController : NavHostController){
                     modifier = Modifier
                         //.height(45.dp)
                         //.width(45.dp)
+                        .defaultMinSize(minWidth = 150.dp)
                         .fillMaxWidth(2/6f)
                         .align(Alignment.CenterHorizontally)
                         .padding(6.dp)
