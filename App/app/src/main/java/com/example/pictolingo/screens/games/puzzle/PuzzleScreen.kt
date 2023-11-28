@@ -1,4 +1,4 @@
-package com.example.pictolingo.screens.games.Puzzle
+package com.example.pictolingo.screens.games.puzzle
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pictolingo.R
@@ -35,10 +34,10 @@ fun PuzzleScreen() {
     val divisor = 1
     val size = minOf(screenWidth, screenHeight) / divisor
 
-    var drawableActual = remember { mutableStateOf(R.drawable.tamalito) }
-    var piezas = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()) }
-    var piezasOrdenCorrecto = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size)) }
-    var showCongratulations = remember { mutableStateOf(false) }
+    val drawableActual = remember { mutableStateOf(R.drawable.tamalito) }
+    val piezas = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()) }
+    val piezasOrdenCorrecto = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size)) }
+    val showCongratulations = remember { mutableStateOf(false) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(Modifier.height(16.dp))
@@ -74,7 +73,7 @@ fun PuzzleScreen() {
             }
         }
 
-        GridDePiezas(piezas.value, size) { nuevasPiezas ->
+        GridDePiezas(piezas.value) { nuevasPiezas ->
             piezas.value = nuevasPiezas
             if (verificarRompecabezas(piezas.value, piezasOrdenCorrecto.value)) {
                 showCongratulations.value = true
@@ -111,8 +110,11 @@ fun PuzzleScreen() {
 }
 
 @Composable
-fun GridDePiezas(piezas: List<PiezaRompecabezas>, size: Dp, onPiezasChanged: (List<PiezaRompecabezas>) -> Unit) {
-    var piezasSeleccionadas = remember { mutableListOf<Int>() }
+fun GridDePiezas(
+    piezas: List<PiezaRompecabezas>,
+    onPiezasChanged: (List<PiezaRompecabezas>) -> Unit
+) {
+    val piezasSeleccionadas = remember { mutableListOf<Int>() }
     val chunkedPiezas = piezas.chunked(3)
 
     Column {
