@@ -71,7 +71,7 @@ fun Levels(navController: NavHostController) {
                 fontFamily = FontFamily.SansSerif)
         }
         items(items = getLevels()){ it ->
-            LevelSmall(it)
+            LevelSmall(it,navController)
         }
         item {
             OutlinedButton(
@@ -106,7 +106,7 @@ fun Levels(navController: NavHostController) {
                 modifier = Modifier
                     .padding(top = 35.dp),
 
-                onClick = { navController.navigate ("miniGames")},
+                onClick = { navController.navigate ("Games")},
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color(0xFF1D2BB6)
                 ),

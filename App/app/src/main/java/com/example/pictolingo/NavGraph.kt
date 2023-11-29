@@ -12,6 +12,8 @@ import com.example.pictolingo.screens.admin.ScreenPictogramCategoryAdmin
 import com.example.pictolingo.screens.admin.ScreenPictogramCreator
 import com.example.pictolingo.screens.users.ScreenPictograms
 import com.example.pictolingo.screens.LoginScreen
+import com.example.pictolingo.screens.games.JuegosNumeros
+import com.example.pictolingo.screens.users.Games
 
 @Composable
 fun Nav(){
@@ -40,6 +42,12 @@ fun Nav(){
         }
         composable(route = "CatCreator"){
             ScreenCategoryCreator(navController)
+        }
+        composable(route = "Games"){
+            Games(navController)
+        }
+        composable(route = "NumGame"){
+            JuegosNumeros(navController)
         }
     }
 }
