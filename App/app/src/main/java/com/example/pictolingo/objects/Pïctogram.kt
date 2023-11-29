@@ -22,18 +22,24 @@ data class PictogramPack(
 fun getPictogramPacks(): List<PictogramPack> {
     return listOf(
         PictogramPack(
-            "animales",
+            "Animales",
             listOf(
-                Pictogram("Abeja", intToAsync(R.drawable.abeja),Color(0xFFB2C8E8)),
-                Pictogram("Burro", intToAsync(R.drawable.burro),Color(0xFFB2C8E8)),
-                Pictogram("Conejo", intToAsync(R.drawable.conejo),Color(0xFFB2C8E8)),
-                Pictogram("Pingüino",intToAsync(R.drawable.pinguino),Color(0xFFB2C8E8)),
-                Pictogram("Vaca", intToAsync(R.drawable.vaca),Color(0xFFB2C8E8)),
-                Pictogram("Gato", intToAsync(R.drawable.gato),Color(0xFFB2C8E8)),
-                Pictogram("Raton", intToAsync(R.drawable.raton),Color(0xFFB2C8E8)),
-                Pictogram("Pato", intToAsync(R.drawable.pato),Color(0xFFB2C8E8)),
-                Pictogram("Zarigüeya", intToAsync(R.drawable.zarigueya),Color(0xFFB2C8E8)),
-                Pictogram("Zorra", intToAsync(R.drawable.zorra),Color(0xFFB2C8E8))
+                Pictogram("Ardilla", intToAsync(R.drawable.ardilla), Color(0xFFB2C8E8)),
+                Pictogram("Burro", intToAsync(R.drawable.burro), Color(0xFFB2C8E8)),
+                Pictogram("Canguro", intToAsync(R.drawable.canguro), Color(0xFFB2C8E8)),
+                Pictogram("Cerdo", intToAsync(R.drawable.cerdo), Color(0xFFB2C8E8)),
+                Pictogram("Cucaracha", intToAsync(R.drawable.cucaracha), Color(0xFFB2C8E8)),
+                Pictogram("Delfín", intToAsync(R.drawable.delfin), Color(0xFFB2C8E8)),
+                Pictogram("Gato", intToAsync(R.drawable.gato), Color(0xFFB2C8E8)),
+                Pictogram("Hipopótamo", intToAsync(R.drawable.hipopotamo), Color(0xFFB2C8E8)),
+                Pictogram("Ladrar", intToAsync(R.drawable.ladrar), Color(0xFFB2C8E8)),
+                Pictogram("Mapache", intToAsync(R.drawable.mapache), Color(0xFFB2C8E8)),
+                Pictogram("Pato", intToAsync(R.drawable.patito), Color(0xFFB2C8E8)),
+                Pictogram("Pingüino", intToAsync(R.drawable.pinguino), Color(0xFFB2C8E8)),
+                Pictogram("Ratón", intToAsync(R.drawable.raton), Color(0xFFB2C8E8)),
+                Pictogram("Vaca", intToAsync(R.drawable.vaca), Color(0xFFB2C8E8)),
+                Pictogram("Zarigüeya", intToAsync(R.drawable.tlacuache), Color(0xFFB2C8E8)),
+                Pictogram("Zorra", intToAsync(R.drawable.zorra), Color(0xFFB2C8E8))
             ), Color(0xFFB2C8E8), intToAsync(R.drawable.animales))
     )
 }
