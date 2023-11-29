@@ -24,8 +24,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
+import com.example.pictolingo.components.textToSpeech
 import com.example.pictolingo.objects.PictogramPack
 import com.example.pictolingo.objects.getPictogramPacks
 
@@ -54,6 +56,7 @@ fun ScreenPictograms(navController: NavHostController) {
 
 @Composable
 fun PictogramGrid(pictogramPack: PictogramPack) {
+    val context = LocalContext.current
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         content = {
@@ -69,8 +72,7 @@ fun PictogramGrid(pictogramPack: PictogramPack) {
                     fontFamily = FontFamily.SansSerif)
             }
             items(items = pictogramPack.anagrams){ it ->
-                val enClick: () -> Unit = {}
-                PictureCard(it.name, it.picture, enClick)
+                PictureCard(it.name, it.picture) { textToSpeech(it.name, context) }
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
