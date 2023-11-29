@@ -10,15 +10,13 @@ data class Pictogram(
     val picture: AsyncImagePainter,
     val color: Color,
 )
+
 data class PictogramPack(
     val name: String,
     val anagrams: List<Pictogram>,
     val color: Color,
     val picture: AsyncImagePainter,
-    // More valueeeees... maybe?
 )
-
-
 
 @Composable
 fun getPictogramPacks(): List<PictogramPack> {
@@ -38,16 +36,4 @@ fun getPictogramPacks(): List<PictogramPack> {
                 Pictogram("Zorra", intToAsync(R.drawable.zorra),Color(0xFFB2C8E8))
             ), Color(0xFFB2C8E8), intToAsync(R.drawable.animales))
     )
-}
-
-fun setPictogramPack(){
-
-}
-
-fun setPictogram(){
-
-}
-
-fun delete(){
-
 }
