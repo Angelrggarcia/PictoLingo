@@ -42,6 +42,7 @@ import androidx.navigation.NavHostController
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.pictolingo.objects.addUser
 import com.example.pictolingo.ui.theme.hueso
 import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
 import com.example.pictolingo.ui.theme.otro_blaco
@@ -68,7 +69,8 @@ fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
                 Log.e(ContentValues.TAG, "JSONException: ${e.message}")
                 "Default Message"  // Default or error message
             }
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, message + "Ha sido Agregado a la lista de perfiles", Toast.LENGTH_LONG).show()
+            addUser(message)
             callback(true)
         },
         Response.ErrorListener { error ->

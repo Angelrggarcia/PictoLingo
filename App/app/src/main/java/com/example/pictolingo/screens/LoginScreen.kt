@@ -119,8 +119,8 @@ fun UsersGrid(navController: NavHostController) {
                     }
                     item {
                         val aImage = intToAsync(picture = R.drawable.suma)
-                        PictureCard(name = "Crea un nuevo usuario", imageURL = aImage) {
-                            navController.navigate("TTS")
+                        PictureCard(name = "Agregar usuario", imageURL = aImage) {
+                            selectedIndex = 1
                         }
                     }
 
