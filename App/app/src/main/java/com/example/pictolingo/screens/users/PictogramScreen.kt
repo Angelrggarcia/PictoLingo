@@ -40,7 +40,7 @@ fun ScreenPictograms(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Categories", "Levels")
+            TopBar(navController, scrollBehavior, "Categories")
         },
 
     ) { innerPadding ->
@@ -71,8 +71,10 @@ fun PictogramGrid(pictogramPack: PictogramPack) {
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif)
             }
-            items(items = pictogramPack.anagrams){ it ->
-                PictureCard(it.name, it.picture) { textToSpeech(it.name, context) }
+            items(items = pictogramPack.anagrams){
+
+                PictureCard(it.name, imageURL = it.picture) { textToSpeech(it.name, context) }
+
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),

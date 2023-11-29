@@ -40,7 +40,7 @@ fun LevelsScreen(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Main", "Levels")
+            TopBar(navController, scrollBehavior, "Main")
         },
 
         ) { innerPadding ->
@@ -68,7 +68,7 @@ fun Levels(navController: NavHostController) {
                 fontFamily = FontFamily.SansSerif)
         }
         items(items = getLevels()){ it ->
-            LevelSmall(it)
+            LevelSmall(it,navController)
         }
         item {
             OutlinedButton(

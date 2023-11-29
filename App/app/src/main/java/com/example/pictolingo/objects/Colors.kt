@@ -1,13 +1,23 @@
 package com.example.pictolingo.objects
 
 import androidx.compose.ui.graphics.Color
+import com.example.pictolingo.ui.theme.amarillo
+import com.example.pictolingo.ui.theme.azul
+import com.example.pictolingo.ui.theme.azul_verdoso
+import com.example.pictolingo.ui.theme.morado
+import com.example.pictolingo.ui.theme.rosa
+import com.example.pictolingo.ui.theme.rosa_fuerte
+import com.example.pictolingo.ui.theme.verde
 
 fun getColorList(): List<Color> {
     return listOf(
-        Color(0xFF5CFBDD),
-        Color(0xFF95416E),
+        amarillo,
+        morado,
+        rosa_fuerte,
         Color(0xFFBA1A1A),
-        Color(0xFF33DEC1),
-        Color(0xFF782956),
+        azul,
+        rosa,
+        verde,
+        azul_verdoso,
         )
 }

@@ -2,6 +2,7 @@ package com.example.pictolingo.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,7 +21,6 @@ fun TopBar(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
     backRoute: String,
-    menuRoute: String,
     back: Boolean = true,
     menu: Boolean = true,
 ) {
@@ -48,11 +48,11 @@ fun TopBar(
         },
         actions = {
             IconButton(
-                onClick = { navController.navigate(menuRoute) },
+                onClick = { navController.navigate("Main") },
                 enabled = menu,
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.Home,
                     contentDescription = "Localized description",
                     tint = if (menu) {
                         Color.White
