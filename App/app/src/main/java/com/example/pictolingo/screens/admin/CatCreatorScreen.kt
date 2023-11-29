@@ -1,5 +1,6 @@
 package com.example.pictolingo.screens.admin
 
+import android.content.ContentResolver
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,13 +36,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.pictolingo.R
 import com.example.pictolingo.components.ColorCard
 import com.example.pictolingo.components.PictureCard
+import com.example.pictolingo.components.SaveImage
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getColorList
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenCategoryCreator(navController: NavHostController) {
@@ -70,37 +77,48 @@ fun ScreenCategoryCreator(navController: NavHostController) {
 fun CatCreator() {
     var color by remember { mutableStateOf(Color(0xFFB2C8E8)) }
     val imageUri = rememberSaveable { mutableStateOf("") }
+    var uriI by remember{ mutableStateOf<Uri>(Uri.parse("https://www.google.com")) }
     val painter = rememberAsyncImagePainter(imageUri.value.ifEmpty { R.drawable.suma })
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()){
         uri: Uri? ->
-        uri?.let { imageUri.value = it.toString() }
+        uri?.let {imageUri.value = it.toString()
+            uriI = it
+        }
     }
+
     LazyColumn(modifier = Modifier
         .fillMaxSize()
-        .padding(start = 40.dp, end = 40.dp), content = {
+        .padding(start = 40.dp, end = 40.dp)
+    ) {
         item {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 text = "Crea una nueva Categoría!!",
                 textAlign = TextAlign.Center,
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif)
-            Row{
-                Box(modifier = Modifier
-                    .fillMaxWidth(1/3f)){
-                    PictureCard(name = "Crea una categoría", color = color, imageURL = painter){
+                fontFamily = FontFamily.SansSerif
+            )
+            Row {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(1 / 3f)
+                ) {
+                    PictureCard(name = "Crea una categoría", color = color, imageURL = painter) {
                         launcher.launch("image/*")
+                        /*val imagen = SaveImage()
+                        imagen.guardarImagenLocalmente(uriI)*/
                     }
                 }
 
-                Column{
+                Column {
                     var name by remember { mutableStateOf("") }
                     var description by remember { mutableStateOf("") }
                     Box(
                         contentAlignment = Alignment.TopCenter
-                    ){
-                        Column{
+                    ) {
+                        Column {
                             OutlinedTextField(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -108,14 +126,15 @@ fun CatCreator() {
                                 onValueChange = { name = it },
                                 label = { Text("Nombre") })
                             LazyHorizontalGrid(rows = GridCells.Fixed(1),
-                                content ={
-                                    items(items = getColorList()){
-                                        ColorCard(color = it){
+                                content = {
+                                    items(items = getColorList()) {
+                                        ColorCard(color = it) {
                                             color = it
                                         }
                                     }
 
-                                }, modifier = Modifier.padding(10.dp).height(80.dp).fillMaxWidth())
+                                }, modifier = Modifier.padding(10.dp).height(80.dp).fillMaxWidth()
+                            )
                         }
                     }
                     OutlinedTextField(
@@ -127,5 +146,5 @@ fun CatCreator() {
                 }
             }
         }
-    })
+    }
 }

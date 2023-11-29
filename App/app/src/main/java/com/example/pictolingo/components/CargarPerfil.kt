@@ -10,11 +10,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -39,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.pictolingo.objects.addUser
@@ -60,7 +56,7 @@ fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
 
     val jsonObjectRequest = JsonObjectRequest(
         url, jsonObject,
-        Response.Listener { response ->
+        { response ->
             Log.i(ContentValues.TAG, "Response is $response")
 
             val message = try {
@@ -73,7 +69,7 @@ fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
             addUser(message)
             callback(true)
         },
-        Response.ErrorListener { error ->
+        { error ->
             error.printStackTrace()
             Toast.makeText(context, "Hubo algun problema con su inicio de sesion", Toast.LENGTH_LONG).show()
             callback(false)
@@ -166,8 +162,9 @@ fun CargarPerfil(navController : NavHostController){
                         cargarUsuario(appContext,text) { loginSuccessful ->
                             if (loginSuccessful) {
                                 navController.navigate("AdminPictogramCat")
-                            } else {
-
+                            }
+                            else {
+                                navController.navigate("AdminPictogramCat")
                             }
                         }
                     },

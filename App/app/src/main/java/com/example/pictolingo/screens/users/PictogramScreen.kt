@@ -73,7 +73,7 @@ fun PictogramGrid(pictogramPack: PictogramPack) {
             }
             items(items = pictogramPack.anagrams){
 
-                PictureCard(it.name, imageURL = it.picture) { textToSpeech(it.name, context) }
+                PictureCard(it.name,it.color,it.picture) { textToSpeech(it.name, context) }
 
             }
         },

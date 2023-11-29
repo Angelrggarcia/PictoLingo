@@ -1,10 +1,8 @@
     @file:Suppress("DEPRECATION")
 
     package com.example.pictolingo.components
-
     import android.content.ContentValues.TAG
     import android.content.Context
-    import android.nfc.Tag
     import android.util.Log
     import android.widget.Toast
     import androidx.compose.foundation.background
@@ -27,6 +25,7 @@
     import androidx.compose.material3.OutlinedTextField
     import androidx.compose.runtime.Composable
     import androidx.compose.runtime.getValue
+    import androidx.compose.runtime.mutableIntStateOf
     import androidx.compose.runtime.mutableStateOf
     import androidx.compose.runtime.remember
     import androidx.compose.runtime.setValue
@@ -39,27 +38,22 @@
     import androidx.compose.ui.text.style.TextAlign
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
-    import androidx.core.content.PackageManagerCompat.LOG_TAG
-    import com.android.volley.Response
     import com.android.volley.toolbox.JsonArrayRequest
     import com.android.volley.toolbox.JsonObjectRequest
     import com.android.volley.toolbox.Volley
-    import com.example.pictolingo.MainActivity
     import com.example.pictolingo.ui.theme.azul_verdoso
     import com.example.pictolingo.ui.theme.blaco
     import com.example.pictolingo.ui.theme.gris
     import com.example.pictolingo.ui.theme.hueso
     import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
     import com.example.pictolingo.ui.theme.otro_blaco
-    import com.google.android.material.snackbar.Snackbar
     import org.json.JSONObject
-    import kotlin.contracts.Returns
     import kotlin.random.Random
 
     @Composable
     fun CrearPerfil( onCreatePerfil : () -> Unit ){
 
-        var screen by remember { mutableStateOf(1) }
+        var screen by remember { mutableIntStateOf(1) }
 
         when(screen) {
             1 -> {Login { screen = 2 } }
@@ -78,12 +72,12 @@
 
         val jsonObjectRequest = JsonObjectRequest(
             url, jsonObject,
-            Response.Listener { response ->
+            { response ->
                 Log.i(TAG, "Response is $response")
                 Toast.makeText(context, "Inicio de sesion Completado", Toast.LENGTH_LONG).show()
                 callback(true)
             },
-            Response.ErrorListener { error ->
+            { error ->
                 error.printStackTrace()
                 Toast.makeText(context, "Hubo algun problema con su inicio de sesion", Toast.LENGTH_LONG).show()
                 callback(false)
@@ -215,10 +209,8 @@
     }
 
 
-
     fun generateRandomNumber(): String {
-        val numero = (1..10).joinToString("") { Random.nextInt(0, 10).toString() }
-        return numero
+        return (1..10).joinToString("") { Random.nextInt(0, 10).toString() }
     }
 
 
@@ -231,10 +223,10 @@
 
         val jsonArrayRequest = JsonArrayRequest(
             url,
-            Response.Listener { response ->
+            { response ->
                 Log.i(TAG, "Response is $response")
             },
-            Response.ErrorListener { error ->
+            { error ->
                 error.printStackTrace()
 
             }
@@ -243,7 +235,7 @@
         queue.add(jsonArrayRequest)
     }
 
-    fun enviarDatos(context: Context, nombre: String, edad:String, Codigo:String){
+    fun enviarDatos(context: Context, nombre: String, edad:String, codigo:String){
 
         val queue = Volley.newRequestQueue(context)
         val url = "https://api-dev-crtb.1.us-1.fl0.io/api/user/signup"
@@ -251,16 +243,16 @@
         val jsonObject = JSONObject()
 
         jsonObject.put("edad",edad)
-        jsonObject.put("code",Codigo)
+        jsonObject.put("code",codigo)
         jsonObject.put("name",nombre)
         jsonObject.put("password","default")
 
         val jsonObjectRequest = JsonObjectRequest(
             url, jsonObject,
-            Response.Listener { response ->
+            { response ->
                 Log.i(TAG, "Response is $response")
             },
-            Response.ErrorListener { error ->
+            { error ->
                 error.printStackTrace()
 
             }
@@ -276,7 +268,7 @@
     fun Perfil(onCreatePerfil : () -> Unit) {
 
         val appContext = LocalContext.current.applicationContext
-        val view = LocalView.current
+        LocalView.current
 
         var nombre by remember { mutableStateOf("") }
         var codigo by remember { mutableStateOf("") }

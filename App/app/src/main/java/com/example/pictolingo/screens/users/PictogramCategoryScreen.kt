@@ -72,7 +72,7 @@ fun PictogramCategoryGrid(pictogramPacks: List<PictogramPack>,navController: Nav
             }
             items(items = pictogramPacks){ it ->
                 val enClick: () -> Unit = {navController.navigate("Pictograms")}
-                PictureCard(it.name, imageURL = it.picture, enClick = enClick)
+                PictureCard(it.name, it.color, imageURL = it.picture, enClick = enClick)
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
