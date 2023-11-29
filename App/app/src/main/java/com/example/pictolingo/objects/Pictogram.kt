@@ -39,7 +39,7 @@ fun getPictogramPacks(): List<PictogramPack> {
                 Pictogram("Ratón", intToAsync(R.drawable.raton), Color(0xFFB2C8E8)),
                 Pictogram("Vaca", intToAsync(R.drawable.vaca), Color(0xFFB2C8E8)),
                 Pictogram("Zarigüeya", intToAsync(R.drawable.tlacuache), Color(0xFFB2C8E8)),
-                Pictogram("Zorra", intToAsync(R.drawable.zorra), Color(0xFFB2C8E8))
+                Pictogram("Zorro", intToAsync(R.drawable.zorra), Color(0xFFB2C8E8))
             ), Color(0xFFB2C8E8), intToAsync(R.drawable.animales))
     )
 }
