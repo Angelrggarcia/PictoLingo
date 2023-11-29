@@ -20,7 +20,6 @@ fun TopBar(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
     backRoute: String,
-    menuRoute: String,
     back: Boolean = true,
     menu: Boolean = true,
 ) {
@@ -48,7 +47,7 @@ fun TopBar(
         },
         actions = {
             IconButton(
-                onClick = { navController.navigate(menuRoute) },
+                onClick = { navController.navigate("Main") },
                 enabled = menu,
             ) {
                 Icon(

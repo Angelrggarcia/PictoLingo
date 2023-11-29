@@ -45,7 +45,7 @@ fun ScreenPictogramCreator(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "AdminPictograms", "Test")
+            TopBar(navController, scrollBehavior, "AdminPictograms")
         },
 
         ) { innerPadding ->
