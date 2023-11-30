@@ -29,7 +29,7 @@ fun getLevels(): List<Level> {
     return listOf(
         Level("Fácil", 51, very_happy_face, azul_verdoso, "NumGame"),
         Level("Medio", 42, happy_face, verde, "PuzGame"),
-        Level("Difícil", 35, neutral_face, rosa, "Categories"),
+        Level("Difícil", 35, neutral_face, rosa, "JLetras"),
         Level("Muy difícil", 18, sad_face, morado, "Categories"),
     )
 }

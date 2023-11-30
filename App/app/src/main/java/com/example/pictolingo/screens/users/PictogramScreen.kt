@@ -23,17 +23,24 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImagePainter
+import com.example.pictolingo.components.MiViewModel
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.components.textToSpeech
+import com.example.pictolingo.objects.Pictogram
 import com.example.pictolingo.objects.PictogramPack
 import com.example.pictolingo.objects.getPictogramPacks
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenPictograms(navController: NavHostController) {
+fun ScreenPictograms(navController: NavHostController,viewModel: MiViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -49,14 +56,15 @@ fun ScreenPictograms(navController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            PictogramGrid(getPictogramPacks()[0])
+            PictogramGrid(getPictogramPacks()[0],viewModel)
         }
     }
 }
 
 @Composable
-fun PictogramGrid(pictogramPack: PictogramPack) {
+fun PictogramGrid(pictogramPack: PictogramPack,viewModel: MiViewModel) {
     val context = LocalContext.current
+    val newPictogram by remember { mutableStateOf(emptyList<Pictogram>()) }
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         content = {
@@ -76,9 +84,24 @@ fun PictogramGrid(pictogramPack: PictogramPack) {
                 PictureCard(it.name,it.color,it.picture) { textToSpeech(it.name, context) }
 
             }
+            items(items = newPictogram){
+                PictureCard(it.name,it.color,it.picture) { textToSpeech(it.name, context) }
+            }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     )
+}
+
+@Composable
+fun savePicto(
+    name: String,
+    color: Color,
+    picture: AsyncImagePainter,
+    list: List<Pictogram>
+): MutableList<Pictogram> {
+    val copy:MutableList<Pictogram> = ArrayList(list)
+    copy.add(Pictogram(name, picture, color))
+    return copy
 }

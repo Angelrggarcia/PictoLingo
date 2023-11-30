@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -39,13 +40,16 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.pictolingo.R
 import com.example.pictolingo.components.ColorCard
+import com.example.pictolingo.components.MiViewModel
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
+import com.example.pictolingo.objects.Pictogram
 import com.example.pictolingo.objects.getColorList
+import com.example.pictolingo.screens.users.savePicto
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenPictogramCreator(navController: NavHostController) {
+fun ScreenPictogramCreator(navController: NavHostController,viewModel: MiViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -61,46 +65,57 @@ fun ScreenPictogramCreator(navController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            Creator()
+            Creator(viewModel)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Creator() {
+fun Creator(viewModel: MiViewModel) {
     var color by remember { mutableStateOf(Color(0xFFB2C8E8)) }
+    var name by remember { mutableStateOf("") }
+    var bool by remember { mutableStateOf(false)}
+    var description by remember { mutableStateOf("")}
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(imageUri.value.ifEmpty { R.drawable.suma })
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()){
             uri: Uri? ->
         uri?.let { imageUri.value = it.toString() }
     }
+
     LazyColumn(modifier = Modifier
         .fillMaxSize()
-        .padding(start = 40.dp, end = 40.dp), content ={
+        .padding(start = 40.dp, end = 40.dp)
+    ) {
         item {
-            Text(modifier = Modifier
-                .fillMaxWidth(),
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 text = "Crea un Pictograma!!",
                 textAlign = TextAlign.Center,
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif)
-            Row{
-                Box(modifier = Modifier
-                    .fillMaxWidth(1/3f)){
-                    PictureCard(name = "Crea un nuevo Pictograma", color = color, imageURL = painter){
+                fontFamily = FontFamily.SansSerif
+            )
+            Row {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(1 / 3f)
+                ) {
+                    PictureCard(
+                        name = "Crea un nuevo Pictograma",
+                        color = color,
+                        imageURL = painter
+                    ) {
                         launcher.launch("image/*")
                     }
                 }
 
-                Column{
-                    var name by remember { mutableStateOf("")}
-                    var description by remember { mutableStateOf("")}
+                Column {
                     Box(
                         contentAlignment = Alignment.TopCenter
-                    ){
+                    ) {
                         Column {
                             OutlinedTextField(
                                 modifier = Modifier
@@ -108,15 +123,20 @@ fun Creator() {
                                 value = name,
                                 onValueChange = { name = it },
                                 label = { Text("Nombre") })
-                            LazyHorizontalGrid(rows = GridCells.Fixed(1),
-                                content ={
-                                    items(items = getColorList()){
-                                        ColorCard(color = it){
+                            LazyHorizontalGrid(
+                                rows = GridCells.Fixed(1),
+                                content = {
+                                    items(items = getColorList()) {
+                                        ColorCard(color = it) {
                                             color = it
                                         }
                                     }
 
-                                }, modifier = Modifier.padding(10.dp).height(80.dp).fillMaxWidth())
+                                }, modifier = Modifier
+                                    .padding(10.dp)
+                                    .height(80.dp)
+                                    .fillMaxWidth()
+                            )
                         }
                     }
                     OutlinedTextField(
@@ -128,5 +148,18 @@ fun Creator() {
                 }
             }
         }
-    })
+        item {
+
+            Button(onClick = { bool = true }) {
+                Text(text = "Guardar")
+            }
+            if (bool) {
+                viewModel.lista =
+                    savePicto(name = name, color = color, picture = painter, list = viewModel.lista)
+                bool = false
+            }
+        }
+    }
+
 }
+
