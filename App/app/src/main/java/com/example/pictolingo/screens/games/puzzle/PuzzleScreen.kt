@@ -76,7 +76,6 @@ fun PuzzleScreen() {
             fontSize = 24.sp)
         Spacer(Modifier.height(16.dp))
 
-        // Botones para cambiar el puzzle
         Row {
             Button(onClick = {
                 drawableActual.value = R.drawable.tamalito
@@ -111,7 +110,6 @@ fun PuzzleScreen() {
             }
         }
 
-        // Botón para reiniciar y mezclar las piezas
         Button(onClick = {
             piezas.value = piezas.value.shuffled()
             showCongratulations.value = false

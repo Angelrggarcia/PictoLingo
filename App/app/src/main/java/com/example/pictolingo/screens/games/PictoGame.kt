@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import com.example.pictolingo.R
 import com.example.pictolingo.components.PictureCard
+import com.example.pictolingo.objects.intToAsync
 
 @Composable
 fun JuegoDePictogramas(dificulty:Int) {
@@ -23,19 +25,20 @@ fun JuegoDePictogramas(dificulty:Int) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ImagenClickable(R.drawable.raton) {
+        val a_Image = intToAsync(picture = R.drawable.raton)
+        ImagenClickable(a_Image) {
 
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        ImagenClickable(R.drawable.vaca) {
+        val aImage = intToAsync(picture = R.drawable.vaca)
+        ImagenClickable(aImage) {
 
         }
     }
 }
 
 @Composable
-fun ImagenClickable(@DrawableRes pictograma: Int, onClick: () -> Unit) {
+fun ImagenClickable(pictograma: AsyncImagePainter, onClick: () -> Unit) {
     PictureCard(imageURL = pictograma) {}
 }
