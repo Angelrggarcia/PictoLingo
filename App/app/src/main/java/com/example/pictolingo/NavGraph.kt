@@ -59,7 +59,7 @@ fun Nav(){
             JuegosNumeros(navController)
         }
         composable(route = "PuzGame"){
-
+            PuzzlesScreens(navController)
         }
     }
 }
