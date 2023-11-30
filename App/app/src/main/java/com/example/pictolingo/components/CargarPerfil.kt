@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.pictolingo.objects.addUser
@@ -56,7 +57,7 @@ fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
 
     val jsonObjectRequest = JsonObjectRequest(
         url, jsonObject,
-        { response ->
+        Response.Listener  { response ->
             Log.i(ContentValues.TAG, "Response is $response")
 
             val message = try {
@@ -69,7 +70,7 @@ fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
             addUser(message)
             callback(true)
         },
-        { error ->
+        Response.ErrorListener{ error ->
             error.printStackTrace()
             Toast.makeText(context, "Hubo algun problema con su inicio de sesion", Toast.LENGTH_LONG).show()
             callback(false)
