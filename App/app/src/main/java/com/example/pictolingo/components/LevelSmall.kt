@@ -34,7 +34,9 @@ import com.example.pictolingo.R
 import com.example.pictolingo.objects.Level
 
 @Composable
+
 fun LevelSmall(level: Level,navController: NavHostController) {
+
     Box(modifier = Modifier
         .padding(horizontal = 30.dp, vertical = 15.dp)
         .border(width = 2.dp, color = Color(0xFF000000), shape = RoundedCornerShape(15.dp))
@@ -48,7 +50,7 @@ fun LevelSmall(level: Level,navController: NavHostController) {
         ))
         .height(80.dp)
         .fillMaxWidth()
-        .clickable { navController.navigate(level.ruta) },
+        .clickable { navController.navigate(level.route) },
         contentAlignment = Alignment.Center
     ){
         Row(

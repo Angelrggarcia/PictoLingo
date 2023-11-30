@@ -7,10 +7,17 @@ data class User(
     val picture: Int,
 )
 
+
+fun addUser(name: String) {
+    userList.add(User(name, R.drawable.user))
+}
+
+private val userList = mutableListOf(
+    User("Juanito", R.drawable.user),
+    User("Chani", R.drawable.user),
+    User("Carlos", R.drawable.user),
+)
+
 fun getUsers(): List<User> {
-    return listOf(
-        User("Juanito", R.drawable.user),
-        User("Chani", R.drawable.user),
-        User("Carlos", R.drawable.user),
-    )
+    return userList
 }

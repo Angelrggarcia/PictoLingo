@@ -32,9 +32,9 @@ fun LetrasGame() {
 
     val orientation = LocalConfiguration.current.orientation
     val columns = if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        GridCells.Fixed(10) // Más columnas en modo horizontal
+        GridCells.Fixed(10)
     } else {
-        GridCells.Fixed(7) // Menos columnas en modo vertical
+        GridCells.Fixed(7)
     }
 
     Column(
@@ -70,14 +70,13 @@ fun LetrasGame() {
                 if (letrasSeleccionadas.isNotEmpty()) {
                     letrasSeleccionadas = letrasSeleccionadas.dropLast(1)
                 }
-                mensaje = "" // Limpiar mensaje anterior
+                mensaje = ""
             },
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Borrar Última Letra")
         }
 
-        // Botón para enviar la palabra
         Button(
             onClick = {
                 if (letrasSeleccionadas.equals(palabraActual, ignoreCase = true)) {
@@ -85,16 +84,15 @@ fun LetrasGame() {
                     juegoCompletado = true
                 } else {
                     mensaje = "Intenta de nuevo"
-                    letrasSeleccionadas = "" // Reiniciar la palabra actual
+                    letrasSeleccionadas = ""
                 }
             },
             modifier = Modifier.padding(16.dp),
-            enabled = letrasSeleccionadas.length == palabraActual.length // Habilitar solo si la palabra está completa
+            enabled = letrasSeleccionadas.length == palabraActual.length
         ) {
             Text("Enviar Palabra")
         }
 
-        // Botón para reiniciar el juego
         Button(
             onClick = {
                 palabraActual = palabras.random()

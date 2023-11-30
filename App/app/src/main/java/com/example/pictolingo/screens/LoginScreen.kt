@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.pictolingo.R
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getUsers
@@ -37,6 +38,7 @@ import com.example.pictolingo.components.SegmentedButtonItem
 import com.example.pictolingo.components.SegmentedButtons
 import com.example.pictolingo.components.CargarPerfil
 import com.example.pictolingo.components.CrearPerfil
+import com.example.pictolingo.objects.intToAsync
 import com.example.pictolingo.ui.theme.blaco
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +51,11 @@ fun LoginScreen(navController: NavHostController) {
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = blaco,
         topBar = {
+ 
             TopBar(navController, scrollBehavior,"Login", false)
+
+            
+
         },
 
         ) { innerPadding ->
@@ -112,10 +118,14 @@ fun UsersGrid(navController: NavHostController) {
                 0 -> {
                     items(items = getUsers()){ it ->
                         val enClick: () -> Unit = {navController.navigate("Levels")}
-                        PictureCard(it.name, it.picture, enClick)
+                        val aImage = intToAsync(picture = it.picture)
+                        PictureCard(it.name, imageURL = aImage, enClick =  enClick)
                     }
                     item {
-                        PictureCard(name = "Crea un nuevo usuario", imageURL = 0) {}
+                        val aImage = intToAsync(picture = R.drawable.suma)
+                        PictureCard(name = "Agregar usuario", imageURL = aImage) {
+                            selectedIndex = 1
+                        }
                     }
 
                 }

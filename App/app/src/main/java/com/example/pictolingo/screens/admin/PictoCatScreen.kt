@@ -24,10 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.pictolingo.R
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.PictogramPack
 import com.example.pictolingo.objects.getPictogramPacks
+import com.example.pictolingo.objects.intToAsync
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,10 +73,11 @@ fun AdminPictogramCategoryGrid(pictogramPacks: List<PictogramPack>, navControlle
             }
             items(items = pictogramPacks){ it ->
                 val enClick: () -> Unit = {navController.navigate("AdminPictograms")}
-                PictureCard(it.name, it.picture, enClick)
+                PictureCard(it.name, imageURL = it.picture, enClick = enClick)
             }
             item {
-                PictureCard(name = "Crea un nuevo Pictograma", imageURL = 0, onClick)
+                val aImage = intToAsync(picture = R.drawable.suma)
+                PictureCard(name = "Crea un nuevo Pictograma", imageURL = aImage, enClick = onClick)
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
