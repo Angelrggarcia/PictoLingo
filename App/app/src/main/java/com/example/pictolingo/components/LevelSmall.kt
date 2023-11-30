@@ -28,12 +28,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.pictolingo.R
 import com.example.pictolingo.objects.Level
 
 @Composable
-fun LevelSmall(level: Level) {
+fun LevelSmall(level: Level, navController:NavHostController) {
     Box(modifier = Modifier
         .padding(horizontal = 30.dp, vertical = 15.dp)
         .border(width = 2.dp, color = Color(0xFF000000), shape = RoundedCornerShape(15.dp))
@@ -47,7 +48,7 @@ fun LevelSmall(level: Level) {
         ))
         .height(80.dp)
         .fillMaxWidth()
-        .clickable { level.enClick },
+        .clickable { navController.navigate(level.route) },
         contentAlignment = Alignment.Center
     ){
         Row(

@@ -24,10 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.pictolingo.R
 import com.example.pictolingo.components.PictureCard
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.PictogramPack
 import com.example.pictolingo.objects.getPictogramPacks
+import com.example.pictolingo.objects.intToAsync
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +40,7 @@ fun ScreenPictogramCategory(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Levels", "Levels")
+            TopBar(navController, scrollBehavior, "Levels")
         },
 
         ) { innerPadding ->
@@ -70,7 +72,7 @@ fun PictogramCategoryGrid(pictogramPacks: List<PictogramPack>,navController: Nav
             }
             items(items = pictogramPacks){ it ->
                 val enClick: () -> Unit = {navController.navigate("Pictograms")}
-                PictureCard(it.name, it.picture, enClick)
+                PictureCard(it.name, it.color, imageURL = it.picture, enClick = enClick)
             }
         },
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),

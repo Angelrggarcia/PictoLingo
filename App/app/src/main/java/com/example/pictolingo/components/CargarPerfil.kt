@@ -1,16 +1,17 @@
 package com.example.pictolingo.components
 
+import android.content.ContentValues
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -27,6 +28,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -34,14 +36,63 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.example.pictolingo.objects.addUser
 import com.example.pictolingo.ui.theme.hueso
 import com.example.pictolingo.ui.theme.md_theme_light_onPrimaryContainer
 import com.example.pictolingo.ui.theme.otro_blaco
+import org.json.JSONException
+import org.json.JSONObject
+
+
+fun cargarUsuario(context:Context, code:String, callback: (Boolean) -> Unit) {
+    val queue = Volley.newRequestQueue(context)
+    val url = "https://api-dev-crtb.1.us-1.fl0.io/api/user/add"
+
+    val jsonObject = JSONObject()
+    jsonObject.put("code", code)
+
+
+    val jsonObjectRequest = JsonObjectRequest(
+        url, jsonObject,
+        { response ->
+            Log.i(ContentValues.TAG, "Response is $response")
+
+            val message = try {
+                response.getString("message")
+            } catch (e: JSONException) {
+                Log.e(ContentValues.TAG, "JSONException: ${e.message}")
+                "Default Message"  // Default or error message
+            }
+            Toast.makeText(context, message + "Ha sido Agregado a la lista de perfiles", Toast.LENGTH_LONG).show()
+            addUser(message)
+            callback(true)
+        },
+        { error ->
+            error.printStackTrace()
+            Toast.makeText(context, "Hubo algun problema con su inicio de sesion", Toast.LENGTH_LONG).show()
+            callback(false)
+        }
+    )
+
+    queue.add(jsonObjectRequest)
+}
+
+
+
+
+
+
+
+
 
 // se encarga de generar la funcion para mandar codigos y traer el perfil
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CargarPerfil(navController : NavHostController){
+
+    val appContext = LocalContext.current.applicationContext
     var text by rememberSaveable { mutableStateOf("") }
 
     Column() {
@@ -61,7 +112,7 @@ fun CargarPerfil(navController : NavHostController){
             Column {
                 Text(
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(10.dp),
                     text = "Introduce el codigo del perfil que desea cargar.",
                     color = md_theme_light_onPrimaryContainer,
                     fontSize = 40.sp,
@@ -86,7 +137,7 @@ fun CargarPerfil(navController : NavHostController){
                 )
                 OutlinedTextField(
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(18.dp)
                         .align(Alignment.CenterHorizontally)
 
                         .fillMaxWidth(.60f),
@@ -108,7 +159,14 @@ fun CargarPerfil(navController : NavHostController){
                 )
                 Button(
                     onClick = {
-                        navController.navigate("AdminPictogramCat")
+                        cargarUsuario(appContext,text) { loginSuccessful ->
+                            if (loginSuccessful) {
+                                navController.navigate("AdminPictogramCat")
+                            }
+                            else {
+                                navController.navigate("AdminPictogramCat")
+                            }
+                        }
                     },
                     modifier = Modifier
                         //.height(45.dp)
@@ -116,7 +174,7 @@ fun CargarPerfil(navController : NavHostController){
                         .defaultMinSize(minWidth = 150.dp)
                         .fillMaxWidth(2/6f)
                         .align(Alignment.CenterHorizontally)
-                        .padding(16.dp)
+                        .padding(6.dp)
 
                     ) {
                     Text(text = "Enviar")

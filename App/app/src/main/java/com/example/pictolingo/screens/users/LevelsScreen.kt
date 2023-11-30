@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.pictolingo.components.LevelSmall
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.objects.getLevels
@@ -39,7 +40,7 @@ fun LevelsScreen(navController: NavHostController) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            TopBar(navController, scrollBehavior, "Main", "Levels")
+            TopBar(navController, scrollBehavior, "Main")
         },
 
         ) { innerPadding ->
@@ -67,12 +68,13 @@ fun Levels(navController: NavHostController) {
                 fontFamily = FontFamily.SansSerif)
         }
         items(items = getLevels()){ it ->
-            LevelSmall(it)
+            LevelSmall(it,navController)
         }
         item {
             OutlinedButton(
                 modifier = Modifier
                     .padding(top = 35.dp),
+
                 onClick = {navController.navigate("Categories")},
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color(0xFF18D2B6)
