@@ -1,9 +1,13 @@
 package com.example.pictolingo.screens.games.puzzle
 
+
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,28 +15,40 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.example.pictolingo.R
 import com.example.pictolingo.components.TopBar
+import kotlinx.coroutines.delay
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +71,6 @@ fun PuzzlesScreens(navController: NavHostController){
 }
 
 
-
 @Composable
 fun PuzzleScreen() {
     val context = LocalContext.current
@@ -65,10 +80,10 @@ fun PuzzleScreen() {
     val divisor = 1
     val size = minOf(screenWidth, screenHeight) / divisor
 
-    val drawableActual = remember { mutableStateOf(R.drawable.tamalito) }
-    val piezas = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()) }
-    val piezasOrdenCorrecto = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size)) }
-    val showCongratulations = remember { mutableStateOf(false) }
+    var drawableActual = remember { mutableStateOf(R.drawable.tamalito) }
+    var piezas = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()) }
+    var piezasOrdenCorrecto = remember { mutableStateOf(cortarImagenEnPiezas(context, drawableActual.value, size)) }
+    var showCongratulations = remember { mutableStateOf(false) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(Modifier.height(16.dp))
@@ -76,6 +91,7 @@ fun PuzzleScreen() {
             fontSize = 24.sp)
         Spacer(Modifier.height(16.dp))
 
+        // Botones para cambiar el puzzle
         Row {
             Button(onClick = {
                 drawableActual.value = R.drawable.tamalito
@@ -103,13 +119,14 @@ fun PuzzleScreen() {
             }
         }
 
-        GridDePiezas(piezas.value) { nuevasPiezas ->
+        GridDePiezas(piezas.value, size) { nuevasPiezas ->
             piezas.value = nuevasPiezas
             if (verificarRompecabezas(piezas.value, piezasOrdenCorrecto.value)) {
                 showCongratulations.value = true
             }
         }
 
+        // Botón para reiniciar y mezclar las piezas
         Button(onClick = {
             piezas.value = piezas.value.shuffled()
             showCongratulations.value = false
@@ -139,11 +156,8 @@ fun PuzzleScreen() {
 }
 
 @Composable
-fun GridDePiezas(
-    piezas: List<PiezaRompecabezas>,
-    onPiezasChanged: (List<PiezaRompecabezas>) -> Unit
-) {
-    val piezasSeleccionadas = remember { mutableListOf<Int>() }
+fun GridDePiezas(piezas: List<PiezaRompecabezas>, size: Dp, onPiezasChanged: (List<PiezaRompecabezas>) -> Unit) {
+    var piezasSeleccionadas = remember { mutableListOf<Int>() }
     val chunkedPiezas = piezas.chunked(3)
 
     Column {
@@ -162,8 +176,7 @@ fun GridDePiezas(
                                 if (piezasSeleccionadas.size == 2) {
                                     val nuevasPiezas = piezas.toMutableList()
                                     val temp = nuevasPiezas[piezasSeleccionadas[0]]
-                                    nuevasPiezas[piezasSeleccionadas[0]] =
-                                        nuevasPiezas[piezasSeleccionadas[1]]
+                                    nuevasPiezas[piezasSeleccionadas[0]] = nuevasPiezas[piezasSeleccionadas[1]]
                                     nuevasPiezas[piezasSeleccionadas[1]] = temp
                                     onPiezasChanged(nuevasPiezas)
                                     piezasSeleccionadas.clear()
