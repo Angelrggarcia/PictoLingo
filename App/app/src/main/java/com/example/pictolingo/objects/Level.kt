@@ -28,8 +28,8 @@ data class Level(
 fun getLevels(): List<Level> {
     return listOf(
         Level("Fácil", 51, very_happy_face, azul_verdoso, "NumGame"),
-        Level("Medio", 42, happy_face, verde, "Categories"),
-        Level("Difícil", 35, neutral_face, rosa, "Categories"),
-        Level("Muy difícil", 18, sad_face, morado, "Categories"),
+        Level("Medio", 42, happy_face, verde, "JPictogramas"),
+        Level("Difícil", 35, neutral_face, rosa, "JLetras"),
+        Level("Muy difícil", 18, sad_face, morado, "LetrasGame"),
     )
 }
