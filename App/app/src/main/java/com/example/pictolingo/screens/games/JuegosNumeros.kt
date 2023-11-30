@@ -1,4 +1,6 @@
 package com.example.pictolingo.screens.games
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.*
@@ -11,9 +13,11 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,6 +25,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.pictolingo.components.TopBar
 import com.example.pictolingo.screens.users.Levels
+import com.example.pictolingo.ui.theme.hueso
+import com.example.pictolingo.ui.theme.otro_blaco
 import kotlin.random.Random
 
 
@@ -45,55 +51,68 @@ fun JuegosNumeros(navController: NavHostController){
     }
 }
 
+
 @Composable
 fun NumberGame() {
     var number1 by remember { mutableStateOf(generateRandomNumber()) }
     var number2 by remember { mutableStateOf(generateRandomNumber()) }
     var message by remember { mutableStateOf("") }
-
-    Column(
+    Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            "Selecciona el número más grande",
-            style = TextStyle(
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+            .fillMaxWidth(1f)
+            .padding(8.dp)
+            .background(
+                color = otro_blaco,
+                shape = RoundedCornerShape(40.dp))
+            .border(width = 4.dp, color = hueso, shape = RoundedCornerShape(40.dp)),
+
+        contentAlignment = Alignment.TopCenter
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "Selecciona el número más grande",
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
             )
-        )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-            message = compareNumbers(number1, number2)
-            number1 = generateRandomNumber()
-            number2 = generateRandomNumber()
-        }) {
-            Text("Número 1: $number1")
+            Button(onClick = {
+                message = compareNumbers(number1, number2)
+                number1 = generateRandomNumber()
+                number2 = generateRandomNumber()
+            }) {
+                Text("Número 1: $number1")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                message = compareNumbers(number1, number2)
+                number1 = generateRandomNumber()
+                number2 = generateRandomNumber()
+            }) {
+                Text("Número 2: $number2")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(message, color = Color.Gray)
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            message = compareNumbers(number1, number2)
-            number1 = generateRandomNumber()
-            number2 = generateRandomNumber()
-        }) {
-            Text("Número 2: $number2")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(message, color = Color.Gray)
     }
 }
 
+
 fun generateRandomNumber(): Int {
-    return Random.nextInt(1, 100)
+    return Random.nextInt(1, 30)
 }
 
 fun compareNumbers(number1: Int, number2: Int): String {

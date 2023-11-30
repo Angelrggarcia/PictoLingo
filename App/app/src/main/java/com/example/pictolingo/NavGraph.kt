@@ -13,6 +13,7 @@ import com.example.pictolingo.screens.admin.ScreenPictogramCreator
 import com.example.pictolingo.screens.users.ScreenPictograms
 import com.example.pictolingo.screens.LoginScreen
 import com.example.pictolingo.screens.games.JuegosNumeros
+import com.example.pictolingo.screens.games.puzzle.PuzzlesScreens
 import com.example.pictolingo.screens.users.Games
 
 @Composable
@@ -48,6 +49,9 @@ fun Nav(){
         }
         composable(route = "NumGame"){
             JuegosNumeros(navController)
+        }
+        composable(route = "PuzGame"){
+            PuzzlesScreens(navController)
         }
     }
 }
