@@ -50,7 +50,7 @@ fun LevelSmall(level: Level,navController: NavHostController) {
         ))
         .height(80.dp)
         .fillMaxWidth()
-        .clickable { navController.navigate(level.route) },
+        .clickable { navController.navigate(level.ruta) },
         contentAlignment = Alignment.Center
     ){
         Row(

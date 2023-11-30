@@ -23,8 +23,6 @@ data class Level(
     val color: Color,
 
     val ruta: String,
-
-    val route: String,
 )
 
 fun getLevels(): List<Level> {

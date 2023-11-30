@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.pictolingo.objects.Level
 import com.example.pictolingo.screens.admin.AdminScreenPictograms
 import com.example.pictolingo.screens.users.LevelsScreen
 import com.example.pictolingo.screens.admin.ScreenCategoryCreator
@@ -12,9 +13,16 @@ import com.example.pictolingo.screens.admin.ScreenPictogramCategoryAdmin
 import com.example.pictolingo.screens.admin.ScreenPictogramCreator
 import com.example.pictolingo.screens.users.ScreenPictograms
 import com.example.pictolingo.screens.LoginScreen
+import com.example.pictolingo.screens.games.JuegoDePictogramas
 import com.example.pictolingo.screens.games.JuegosNumeros
 import com.example.pictolingo.screens.games.puzzle.PuzzlesScreens
 import com.example.pictolingo.screens.users.Games
+import com.example.pictolingo.ui.theme.happy_face
+import com.example.pictolingo.ui.theme.morado
+import com.example.pictolingo.ui.theme.neutral_face
+import com.example.pictolingo.ui.theme.rosa
+import com.example.pictolingo.ui.theme.sad_face
+import com.example.pictolingo.ui.theme.verde
 
 @Composable
 fun Nav(){
@@ -51,7 +59,7 @@ fun Nav(){
             JuegosNumeros(navController)
         }
         composable(route = "PuzGame"){
-            PuzzlesScreens(navController)
+
         }
     }
 }

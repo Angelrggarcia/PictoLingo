@@ -38,6 +38,7 @@
     import androidx.compose.ui.text.style.TextAlign
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
+    import com.android.volley.Response
     import com.android.volley.toolbox.JsonArrayRequest
     import com.android.volley.toolbox.JsonObjectRequest
     import com.android.volley.toolbox.Volley
@@ -72,12 +73,12 @@
 
         val jsonObjectRequest = JsonObjectRequest(
             url, jsonObject,
-            { response ->
+            Response.Listener{ response ->
                 Log.i(TAG, "Response is $response")
                 Toast.makeText(context, "Inicio de sesion Completado", Toast.LENGTH_LONG).show()
                 callback(true)
             },
-            { error ->
+           Response.ErrorListener { error ->
                 error.printStackTrace()
                 Toast.makeText(context, "Hubo algun problema con su inicio de sesion", Toast.LENGTH_LONG).show()
                 callback(false)
@@ -223,10 +224,10 @@
 
         val jsonArrayRequest = JsonArrayRequest(
             url,
-            { response ->
+            Response.Listener { response ->
                 Log.i(TAG, "Response is $response")
             },
-            { error ->
+            Response.ErrorListener  { error ->
                 error.printStackTrace()
 
             }
