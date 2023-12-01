@@ -27,8 +27,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.pictolingo.components.TopBar
-//import com.example.pictolingo.screens.games.puzzle.PuzzleScreen
-
+import com.example.pictolingo.objects.getPictogramPacks
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,14 +50,13 @@ fun JuegoLetras(navController: NavHostController){
     }
 }
 
-
-
 @Composable
 fun LetrasGame() {
     // Lista de palabras posibles
-    val palabras = listOf("GATO", "PERRO", "CASA", "ÁRBOL", "FLOR")
+    val pictogramas = getPictogramPacks()
 
-    var palabraActual by remember { mutableStateOf(palabras.random()) }
+    var pictogramaActual by remember { mutableStateOf(pictogramas.random()) }
+    var palabraActual by remember { mutableStateOf(pictogramaActual.anagrams.random().name) }
     var letrasSeleccionadas by remember { mutableStateOf("") }
     var juegoCompletado by remember { mutableStateOf(false) }
     var mensaje by remember { mutableStateOf("") }
@@ -78,7 +77,9 @@ fun LetrasGame() {
         Text(text = letrasSeleccionadas)
         Text(text = mensaje)
 
-        val letras = ('A'..'Z') + 'Ñ'
+        val letras = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+            'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', ' ',).filter{it in palabraActual.uppercase(Locale.ROOT) }
         LazyVerticalGrid(
             columns = columns,
             contentPadding = PaddingValues(4.dp)
@@ -120,7 +121,7 @@ fun LetrasGame() {
                 }
             },
             modifier = Modifier.padding(16.dp),
-            enabled = letrasSeleccionadas.length == palabraActual.length // Habilitar solo si la palabra está completa
+            //enabled = letrasSeleccionadas.length == palabraActual.length // Habilitar solo si la palabra está completa
         ) {
             Text("Enviar Palabra")
         }
@@ -128,7 +129,8 @@ fun LetrasGame() {
         // Botón para reiniciar el juego
         Button(
             onClick = {
-                palabraActual = palabras.random()
+                pictogramaActual = pictogramas.random()
+                palabraActual = pictogramaActual.anagrams.random().name
                 letrasSeleccionadas = ""
                 juegoCompletado = false
                 mensaje = ""
