@@ -225,7 +225,8 @@ fun MemoryGameScreen(viewModel: MemoryGameViewModel = androidx.lifecycle.viewmod
         if (gameCompleted) {
             AlertDialog(
                 onDismissRequest = { viewModel.restartGame() }, // Reinicia el juego cuando se cierra el diálogo
-                title = { Text("Juego Completado") },
+                title = {
+                    Text("Juego Completado") },
                 text = { Text("¡Felicidades, has completado con éxito el juego!") },
                 confirmButton = {
                     Button(onClick = { viewModel.restartGame() }) {

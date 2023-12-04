@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.pictolingo.components.TopBar
@@ -80,9 +82,15 @@ fun LetrasGame() {
         val letras = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', ' ',).filter{it in palabraActual.uppercase(Locale.ROOT) }
+
+
         LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxWidth(),
             columns = columns,
-            contentPadding = PaddingValues(4.dp)
+            horizontalArrangement = Arrangement.Center,
+            contentPadding = PaddingValues(4.dp),
+
         ) {
             items(letras.size) { index ->
                 Button(
@@ -91,8 +99,11 @@ fun LetrasGame() {
                             letrasSeleccionadas += letras[index]
                         }
                     },
-                ) {
-                    Text(text = letras[index].toString())
+                    modifier = Modifier
+                        .padding(2.dp),
+                    ) {
+                    Text(text = letras[index].toString(),
+                        textAlign = TextAlign.Center)
                 }
             }
         }

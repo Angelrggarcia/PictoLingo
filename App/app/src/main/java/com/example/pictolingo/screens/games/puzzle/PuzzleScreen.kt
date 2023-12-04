@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,11 +25,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,8 +76,9 @@ fun PuzzleScreen() {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(Modifier.height(16.dp))
-        Text("¡Bienvenido a Picto Puzzles!",
-            fontSize = 24.sp)
+        Text("¡Selecciona una pieza para cambiar su posicion con orea pieza!",
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center)
         Spacer(Modifier.height(16.dp))
 
         // Botones para cambiar el puzzle
@@ -83,25 +87,40 @@ fun PuzzleScreen() {
                 drawableActual.value = R.drawable.ardilla
                 piezas.value = cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()
                 piezasOrdenCorrecto.value = cortarImagenEnPiezas(context, drawableActual.value, size)
-                showCongratulations.value = false
-            }) {
-                Text("Ardilla")
+                showCongratulations.value = false },
+
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent),
+                modifier = Modifier.padding(4.dp)
+
+                ) {
+                Text("Ardilla",
+                    color = Color.Black)
             }
             Button(onClick = {
                 drawableActual.value = R.drawable.avion
                 piezas.value = cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()
                 piezasOrdenCorrecto.value = cortarImagenEnPiezas(context, drawableActual.value, size)
                 showCongratulations.value = false
-            }) {
-                Text("Avión")
+            },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent),
+                modifier = Modifier.padding(4.dp)
+            ) {
+                Text("Avión", color = Color.Black)
             }
             Button(onClick = {
                 drawableActual.value = R.drawable.bomberos
                 piezas.value = cortarImagenEnPiezas(context, drawableActual.value, size).shuffled()
                 piezasOrdenCorrecto.value = cortarImagenEnPiezas(context, drawableActual.value, size)
                 showCongratulations.value = false
-            }) {
-                Text("Bomberos")
+            },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent),
+                modifier = Modifier.padding(4.dp)
+
+                ) {
+                Text("Bomberos", color = Color.Black)
             }
         }
 
